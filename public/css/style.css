@@ -1,0 +1,160 @@
+@font-face {
+  font-family: olivier;
+  src: url("../fonts/olivier.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: lato;
+  src: url("../fonts/lato.ttf") format("truetype");
+}
+
+header{
+  height: 100vh;
+  padding: 25vh 0;
+  background: url("/img/bg.jpg");
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.navbar-light .navbar-nav .nav-link{
+  font-family: olivier;
+  color: #e2fcfb;
+  text-shadow: 1px 1px  blue;
+  margin: 0 25px;
+  font-size: 25px;
+}
+.navbar-light .navbar-nav .nav-item:before{
+  background-image: url('');
+}
+.navbar-light .navbar-nav .nav-item:hover{
+  background-image: url('/img/flocon.png');
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.navbar-light .navbar-nav .nav-link:hover{
+  color: #e2fcfb;
+}
+.navbar-light .navbar-brand, footer .navbar-brand{
+  font-family: olivier;
+  color: #e2fcfb;
+  text-shadow: 1px 1px  blue;
+  margin: 0 25px;
+  font-size: 40px;
+  text-align: center;
+}
+.navbar-light .navbar-brand:hover{
+  font-family: olivier;
+  color: #e2fcfb;
+  text-shadow: 1px 1px  blue;
+  margin: 0 25px;
+  font-size: 40px;
+}
+h1 {
+  text-align: center;
+  font-size: 100px;
+  color: #e2fcfb;
+  font-family: olivier;
+  text-shadow: 1px 1px  blue;
+}
+.title_header{
+  font-size: 200px;
+}
+
+h2 {
+  text-align: center;
+  font-size: 50px;
+  font-family: olivier;
+  color: #e2fcfb;
+  text-shadow: 1px 1px  blue;
+}
+.pseudo_connect{
+  font-size: 25px;
+  font-family: olivier;
+  color: #e2fcfb;
+  text-shadow: 1px 1px  blue;
+}
+p{
+  font-size: 20px;
+  font-family: lato;
+}
+
+#trick_home{
+  background: #fff;
+  padding-top: 100px;
+}
+.btn-primary{
+  background-color: #e2fcfb;
+  border: solid 2px #e2fcfb;
+  color: blue;
+  font-family: olivier;
+}
+form .btn-primary{
+  width: 200px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.btn-primary:hover{
+  background-color: blue;
+  border: solid 2px #e2fcfb;
+  color: #e2fcfb;
+}
+#register, #login{
+  height: 100vh;
+  width: 100%;
+  padding: 25vh 0;
+  background: url("/img/bg.jpg");
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+footer{
+  margin: 25px 0;
+}
+.logo_footer{
+  font-family: olivier;
+  color: #e2fcfb;
+  text-shadow: 1px 1px  blue;
+  margin: 0 25px;
+  font-size: 40px;
+  text-decoration: none;
+}
+
+.logo_footer:hover{
+  font-family: olivier;
+  color: #e2fcfb;
+  text-shadow: 1px 1px  blue;
+  margin: 0 25px;
+  font-size: 40px;
+}
+.form-control{
+  width: 40%;
+  background: transparent;
+border: solid 3px #fff;
+color: #fff;
+font-family: lato;
+font-size:20px;
+display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+form{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 100px;
+}
+form input{
+  margin-bottom: 20px;
+}
+label{
+  font-family: olivier;
+  color: #fff;
+  font-size: 25px;
+ position: absolute;
+}
+
+
