@@ -28,11 +28,10 @@ class Comments
     #[ORM\JoinColumn(nullable: false)]
     private $tricks_Id;
 
-    #[ORM\Column(type: 'integer')]
+    #[ORM\ManyToOne(targetEntity: users::class)]
+    #[ORM\JoinColumn(nullable: false)]
     private $users_id;
 
-    #[ORM\ManyToMany(targetEntity: users::class, inversedBy: 'comments')]
-    private $parent;
 
     public function __construct()
     {
@@ -92,38 +91,14 @@ class Comments
         return $this;
     }
 
-    public function getUsersId(): ?int
+    public function getUsersId(): ?users
     {
         return $this->users_id;
     }
 
-    public function setUsersId(int $users_id): self
+    public function setUsersId(?users $users_id): self
     {
         $this->users_id = $users_id;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, users>
-     */
-    public function getParent(): Collection
-    {
-        return $this->parent;
-    }
-
-    public function addParent(users $parent): self
-    {
-        if (!$this->parent->contains($parent)) {
-            $this->parent[] = $parent;
-        }
-
-        return $this;
-    }
-
-    public function removeParent(users $parent): self
-    {
-        $this->parent->removeElement($parent);
 
         return $this;
     }

@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ tricks.name }} | {% endblock %}
+
+{% block body %}
+    <header id='single'>
+        <h1>{{ tricks.name }}</h1>
+    </header>
+    <section class="container single-trick">
+        <div class="row">
+            <div class="col-6">
+                <img src="/img/{{tricks.photo}}">
+            </div>
+            <div class="col-6">
+                <video width="" height="" controls>
+                    <source src="{{tricks.video}}" >
+                </video>
+            </div>  
+        </div>
+        <div class="row">
+            <div class="col-6">    
+                <h2>type de trick</h2>
+                <p>{{tricks.type}}</p>
+            </div>
+            <div class="col-6">
+                <h2>Description</h2>
+                <p>{{tricks.description}}<p>
+            </div>
+        </div>
+    </section>
+{% endblock %}

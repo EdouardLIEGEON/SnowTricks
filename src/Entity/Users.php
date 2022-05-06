@@ -34,8 +34,6 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string', length: 50)]
     private $name;
 
-    #[ORM\ManyToMany(targetEntity: Comments::class, mappedBy: 'parent')]
-    private $comments;
 
     public function __construct()
     {
@@ -142,24 +140,5 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     public function getComments(): Collection
     {
         return $this->comments;
-    }
-
-    public function addComment(Comments $comment): self
-    {
-        if (!$this->comments->contains($comment)) {
-            $this->comments[] = $comment;
-            $comment->addParent($this);
-        }
-
-        return $this;
-    }
-
-    public function removeComment(Comments $comment): self
-    {
-        if ($this->comments->removeElement($comment)) {
-            $comment->removeParent($this);
-        }
-
-        return $this;
     }
 }
