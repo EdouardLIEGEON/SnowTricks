@@ -28,7 +28,7 @@ class Comments
     #[ORM\JoinColumn(nullable: false)]
     private $tricks_Id;
 
-    #[ORM\ManyToOne(targetEntity: users::class)]
+    #[ORM\ManyToOne(targetEntity: Users::class, inversedBy: 'comments')]
     #[ORM\JoinColumn(nullable: false)]
     private $users_id;
 

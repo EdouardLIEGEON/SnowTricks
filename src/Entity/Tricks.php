@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\TricksRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 #[ORM\Entity(repositoryClass: TricksRepository::class)]
 class Tricks
@@ -27,6 +28,9 @@ class Tricks
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $video;
+
+    #[ORM\Column(type: 'date', nullable: true)]
+    private $created_at;
 
     public function getId(): ?int
     {
@@ -92,4 +96,17 @@ class Tricks
 
         return $this;
     }
+
+    public function getCreated_at(): ?\DateTimeInterface
+    {
+        return $this->created_at;
+    }
+
+    public function setCreated_at(?\DateTimeInterface $created_at): self
+    {
+        $this->created_at = $created_at;
+
+        return $this;
+    }
+
 }

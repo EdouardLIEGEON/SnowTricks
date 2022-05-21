@@ -7,11 +7,13 @@
   font-family: lato;
   src: url("../fonts/lato.ttf") format("truetype");
 }
-
-header, #register, #login, #single{
+html{
+  overflow-x:hidden;
+}
+header, #register, #login{
   height: 100vh;
   width: 100%;
-  padding: 25vh 0;
+  padding: 25vh 0 0 0;
   background: url("/img/bg.jpg");
   background-attachment: fixed;
   background-position: center;
@@ -20,14 +22,16 @@ header, #register, #login, #single{
 }
 #tricks{
   width: 100%;
-  padding: 25vh 0;
+  padding: 25vh 0 0 0;
   background: url("/img/bg.jpg");
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
-
+nav{
+  background: #fff;
+}
 .navbar-light .navbar-nav .nav-link{
   font-family: olivier;
   color: #e2fcfb;
@@ -67,6 +71,9 @@ h1 {
   color: #e2fcfb;
   font-family: olivier;
   text-shadow: 1px 1px  blue;
+}
+#tricks{
+padding: 40vh 0;
 }
 .title_header{
   font-size: 200px;
@@ -113,7 +120,9 @@ form .btn-primary{
 }
 
 footer{
-  margin: 25px 0;
+  margin-top: 50px;
+  padding: 25px 0;
+  border-top: solid 2px #e2fcfb;
 }
 .logo_footer{
   font-family: olivier;
@@ -176,7 +185,7 @@ label{
   text-decoration: none;
 }
 .tricks{
-  background: #fff;
+  background: #e2fcfb;
   width: 450px;
   height: 100px;
   padding-top: 35px;
@@ -184,6 +193,114 @@ label{
 .links_tricks img{
 width:30px;
 height:30px;
+}
+.single img{
+width: 600px;
+height: 400px;
+}
+.single{
+  margin: 100px 0;
+}
+.single h2{
+  margin-bottom: 50px;
+}
+ .blue{
+  background: #e2fcfb;
+  padding: 50px 0px;
+  justify-content: space-around;
+}
+.blue p{
+  color: blue;
+  text-align: center;
+}
+.blue .description{
+  margin-bottom:100px;
+}
+.blue .bottom{
+  border: solid 1px blue;
+  margin: 0 50px;
+  padding-top:15px;
+}
+.blue .bottom h3{
+  font-weight: bold;
+  color: blue;
+  text-align: center;
+  font-family: olivier;
+  font-size:25px;
+}
+#scroll_to_top {
+  width: 200px;
+  height: 100px;
+  bottom: 50px;
+  right: 30px;
+  display: block;
+  margin-top: 100px;
+  margin-left: auto;
+  margin-right: auto;
+}
+#scroll_to_top img {
+  width: 200px;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  transition: opacity 500ms;
+  visibility: hidden;
+  opacity: 0;
+}
+.overlay:target {
+  visibility: visible;
+  opacity: 1;
+}
+#scroll_to_down{
+  margin: 25vh;
+  display: block;
+  margin-left: 45vw;
+}
+.popup {
+  margin: 70px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 5px;
+  width: 30%;
+  position: relative;
+  transition: all 5s ease-in-out;
+  border: solid 3px #e2fcfb;
+  box-shadow: 3px 3px 3px blue;
+}
+.close{
+  display: flex;
+
+}
+.popup .btn-primary a{
+  text-decoration: none;
+  text-align: center;
+}
+.popup .btn-primary{
+border: solid 1px blue;
+}
+
+.popup .btn-primary:hover{
+  background: #fff;
+}
+
+.popup .content {
+  max-height: 30%;
+  overflow: auto;
+}
+
+@media screen and (max-width: 700px){
+  .box{
+    width: 70%;
+  }
+  .popup{
+    width: 70%;
+  }
 }
 
 

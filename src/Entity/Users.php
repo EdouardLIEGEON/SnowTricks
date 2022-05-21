@@ -22,9 +22,6 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string', length: 180, unique: true)]
     private $email;
 
-    #[ORM\Column(type: 'json')]
-    private $roles = [];
-
     #[ORM\Column(type: 'string')]
     private $password;
 
@@ -33,6 +30,9 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: 'string', length: 50)]
     private $name;
+
+    #[ORM\OneToMany(mappedBy: 'users_id', targetEntity: Comments::class)]
+    private $comments;
 
 
     public function __construct()
@@ -140,5 +140,27 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     public function getComments(): Collection
     {
         return $this->comments;
+    }
+
+    public function addComment(Comments $comment): self
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments[] = $comment;
+            $comment->setUsersId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comments $comment): self
+    {
+        if ($this->comments->removeElement($comment)) {
+            // set the owning side to null (unless already changed)
+            if ($comment->getUsersId() === $this) {
+                $comment->setUsersId(null);
+            }
+        }
+
+        return $this;
     }
 }
