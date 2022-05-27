@@ -22,19 +22,12 @@ class TricksController extends AbstractController
     #[Route('/{name}', name: 'single')]
     public function single(Tricks $tricks, CommentsRepository $commentsRepository): Response
     {
-
-        return $this->render('tricks/single.html.twig', ['tricks'=> $tricks, 'comments'=> $commentsRepository->findAll()]);
+        return $this->render('/tricks/single.html.twig', ['tricks'=> $tricks, 'comments'=> $commentsRepository->findBy(['tricks_Id' =>$tricks->id])]);
     }
-    #[Route('/update', name: 'update')]
-    public function update():Response
+    #[Route('/tricks/create', name:'create')]
+    public function create()
     {
-        return $this->render('tricks/update.html.twig');
-
-    }
-    #[Route('/create', name:'create')]
-    public function create(): Response
-    {
-        return $this->render('tricks/create.html.twig' );
+        return $this->render('/tricks/create.html.twig');
     }
     
 }

@@ -56,17 +56,18 @@
             </div>
         </div>
 
-        <div class="row single">
-        
+        <div class="row single ">
             <h2>Discussions sur "{{tricks.name}}"</h2>
-            <div class="col-4">
+            <div class="col-3">
             </div>
-            <div class="col-4">
+            <div class="col-6 comments">
                 {% for comment in comments %}
-                     {{comment.content}}
+                    <img src=''>
+                    <h3>Jean-Louis : </h3>
+                    <p class="comment">{{comment.content}}</p>
                 {% endfor %} 
             </div>
-            <div class="col-4">
+            <div class="col-3">
             </div>
         </div>
 
