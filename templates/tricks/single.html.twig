@@ -3,6 +3,7 @@
 {% block title %}{{ tricks.name }} | {% endblock %}
 
 {% block body %}
+{% if app.user %}
     <div class="row" style="background:transparent;">
         <div class="col-10">
         </div>
@@ -10,6 +11,8 @@
             <a class="button links_tricks" href="#popup1"><img src="/img/delete.png"></a>
         </div>
     </div>    
+    {% else %}
+    {% endif %}
     <header id='tricks'>
         <h1>{{ tricks.name }}</h1>
     </header>

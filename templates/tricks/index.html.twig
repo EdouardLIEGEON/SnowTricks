@@ -15,10 +15,13 @@
                 <div class="col-3 trick">
                     <img class="photo_tricks" src="/img/{{trick.photo}}">
                     <div class="container-fluid tricks">
-                        <div class="col-10"><a href="/tricks/{{trick.name}}"><h2>{{trick.name}}</h2></a></div>
+                        <div class="col-10"><a href="/tricks/trick/{{trick.name}}"><h2>{{trick.name}}</h2></a></div>
+                        {% if app.user %}
                         <div class="col-2"><a href="/tricks/update" class="links_tricks"><img src="/img/update.png"></a>
                             <a class="button links_tricks" href="#popup1"><img src="/img/delete.png"></a>
                         </div>
+                        {% else %}
+                        {% endif %}
                     </div>
                 </div>
                 {% endfor %}
