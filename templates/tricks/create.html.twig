@@ -6,6 +6,21 @@
 
     <section id='tricks'>
             <h1>Créer un trick</h1>
+        <div class="container" >
+            <div class="row">
+                <div class="col form">
+                        {{ form_start(CreateTrick) }}
+                            {{ form_row(CreateTrick.name) }}
+                            {{ form_row(CreateTrick.description) }}
+                            {{ form_row(CreateTrick.type) }}
+                            {{ form_row(CreateTrick.photo) }}
+                            {{ form_row(CreateTrick.video) }}
+
+                            <button type="submit" class="btn btn-lg btn-primary my-3">Créer</button>
+                        {{ form_end(CreateTrick) }}
+                </div>
+            </div>
+    </div>
 
     </section>
 {% endblock %}
