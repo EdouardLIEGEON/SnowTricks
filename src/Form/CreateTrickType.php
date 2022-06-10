@@ -6,9 +6,9 @@ use App\Entity\Tricks;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\File;
 
 class CreateTrickType extends AbstractType
 {
@@ -34,12 +34,25 @@ class CreateTrickType extends AbstractType
                 'attr' => [
                     'class' => 'form-control'
                 ],
-                'label' => 'Photo du Trick'])
+                'label' => 'Photo du Trick',
+                'mapped'=>false,
+                'required'=>false,
+                'constraints' => [
+                    new File([
+                        'maxSize' => '1024k',
+                        'mimeTypes' => [
+                            'image/jpg',
+                            'image/png'
+                        ],
+                        'mimeTypesMessage' => 'Seuls les formats jpg et png sont authorisés',
+                    ])
+                ]
+                ])
             ->add('video', TextType::class , [
                 'attr' => [
                     'class' => 'form-control'
                 ],
-                'label' => 'Video du Trick']);
+                'label' => 'Lien vers la video du Trick']);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

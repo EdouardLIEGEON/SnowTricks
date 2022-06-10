@@ -13,6 +13,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\File;
+
 
 class RegistrationFormType extends AbstractType
 {
@@ -35,7 +37,17 @@ class RegistrationFormType extends AbstractType
                 'attr' => [
                     'class' => 'form-control'
                 ],
-                'label' => 'Image du profil'
+                'label' => 'Image du profil',
+                'constraints' => [
+                    new File([
+                        'maxSize' => '1024k',
+                        'mimeTypes' => [
+                            'image/jpg',
+                            'image/png'
+                        ],
+                        'mimeTypesMessage' => 'Seuls les formats jpg et png sont authorisés',
+                    ])
+                ]
                 ])
             ->add('plainPassword', PasswordType::class, [
                 // instead of being set onto the object directly,

@@ -13,6 +13,8 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 
 #[Route('/tricks', name: 'tricks_')]
@@ -26,7 +28,7 @@ class TricksController extends AbstractController
     }
     
     #[Route('/create', name:'create')]
-    public function create(ManagerRegistry $doctrine, Request $request): Response
+    public function create(ManagerRegistry $doctrine, Request $request, SluggerInterface $slugger): Response
     {
         $entityManager = $doctrine->getManager();
         $tricks = new Tricks();
@@ -35,12 +37,35 @@ class TricksController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $tricks->setName($form->get('name')->getData())
-            ->setDescription($form->get('description')->getData())
-            ->setType($form->get('type')->getData())
-            ->setPhoto($form->get('photo')->getData())
-            ->setVideo($form->get('video')->getData());
+            $setName = $form->get('name')->getData();
+            $setDescription = $form->get('description')->getData();
+            $setType = $form->get('type')->getData();
+            $setPhoto = $form->get('photo')->getData();
+            $setVideo = $form->get('video')->getData();
 
+
+            // this condition is needed because the 'brochure' field is not required
+            // so the PDF file must be processed only when a file is uploaded
+            if ($setPhoto) {
+                $originalFilename = pathinfo($setPhoto->getClientOriginalName(), PATHINFO_FILENAME);
+                // this is needed to safely include the file name as part of the URL
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$setPhoto->guessExtension();
+
+                // Move the file to the directory where brochures are stored
+                try {
+                    $setPhoto->move(
+                        $this->getParameter('tricks_photo'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during file upload
+                }
+
+                // updates the 'brochureFilename' property to store the PDF file name
+                // instead of its contents
+                $tricks->setPhoto($newFilename);
+            }
             $entityManager->persist($tricks);
             $entityManager->flush();
 
@@ -49,6 +74,18 @@ class TricksController extends AbstractController
         }
 
         return $this->render('/tricks/create.html.twig', [ 'CreateTrick' => $form->createView()]);
+    }
+
+    #[Route('/update', name:'update')]
+    public function update(ManagerRegistry $doctrine, Request $request, SluggerInterface $slugger): Response
+    {
+        $entityManager = $doctrine->getManager();
+        $tricks = new Tricks();
+        $form = $this->createForm(CreateTrickType::class, $tricks);
+        $form->handleRequest($request);
+
+        return $this->render('/tricks/update.html.twig', [ 'UpdateTrick' => $form->createView()]);
+
     }
 
     #[Route('/delete/{id}', name: 'delete')]
@@ -62,10 +99,10 @@ class TricksController extends AbstractController
 
         }else{
 
-            $this->addFlash(type:'success', message: 'Le trick est inexistant');
+            $this->addFlash(type:'error', message: 'Le trick est inexistant');
 
         }
-        return $this->redirectToRoute(route:'/tricks');
+        return $this->redirect('/tricks');
     }
 
     #[Route('/trick/{name}', name: 'single')]
