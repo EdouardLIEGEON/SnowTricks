@@ -20,19 +20,23 @@ class CreateTrickType extends AbstractType
                     'class' => 'form-control'
                 ],
                 'label' => 'Nom'])
+
             ->add('description', textType::class , [
                 'attr' => [
                     'class' => 'form-control'
                 ],
                 'label' => 'Description'])
+
             ->add('type', textType::class , [
                 'attr' => [
                     'class' => 'form-control'
                 ],
                 'label' => 'Type de Trick'])
+
             ->add('photo', FileType::class , [
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'form-control',
+                    'placeholder'=> "jpg et png de moins de max 1mo"
                 ],
                 'label' => 'Photo du Trick',
                 'mapped'=>false,
@@ -41,16 +45,19 @@ class CreateTrickType extends AbstractType
                     new File([
                         'maxSize' => '1024k',
                         'mimeTypes' => [
-                            'image/jpg',
-                            'image/png'
+                            'image/jpeg',
+                            'image/png',
+
                         ],
                         'mimeTypesMessage' => 'Seuls les formats jpg et png sont authorisés',
                     ])
-                ]
+                    ],
                 ])
+
             ->add('video', TextType::class , [
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'form-control',
+                    'placeholder'=> "Récupérez l'url de partage de la vidéo "
                 ],
                 'label' => 'Lien vers la video du Trick']);
     }

@@ -5,7 +5,7 @@
 {% block body %}
 
     <section id='tricks'>
-            <h1>Créer un trick</h1>
+        <h1>Créer un trick</h1>
         <div class="container" >
             <div class="row">
                 <div class="col form">
@@ -15,7 +15,6 @@
                             {{ form_row(CreateTrick.type) }}
                             {{ form_row(CreateTrick.photo) }}
                             {{ form_row(CreateTrick.video) }}
-                            <p style="text-align:center;font-size:14px;">Récupérez l'url de partage de la vidéo</p>
 
                             <button type="submit" class="btn btn-lg btn-primary my-3">Créer le Trick</button>
                         {{ form_end(CreateTrick) }}

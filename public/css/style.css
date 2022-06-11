@@ -143,13 +143,19 @@ footer{
 .form-control{
   width: 40%;
   background: transparent;
-border: solid 3px #fff;
-color: #fff;
-font-family: lato;
-font-size:20px;
-display: block;
+  border: solid 3px #fff;
+  color: #fff;
+  font-family: lato;
+  font-size:20px;
+  display: block;
   margin-left: auto;
   margin-right: auto;
+}
+form input{
+  margin-bottom: 20px;
+  font-family: lato;
+  font-size: 14px;
+  text-align: center;
 }
 form{
   display: block;
@@ -157,9 +163,7 @@ form{
   margin-right: auto;
   margin-top: 100px;
 }
-form input{
-  margin-bottom: 20px;
-}
+
 label{
   font-family: olivier;
   color: #fff;

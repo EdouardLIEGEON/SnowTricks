@@ -64,9 +64,11 @@
             <div class="col-3">
             </div>
             <div class="col-6 comments">
-                {% for comment in comments %}
-                    <img src=''>
-                    <h3>Jean-Louis : </h3>
+                {% for user in users %}
+                    <img src='/img/{{user.photo}}'>
+                    <h3>{{user.name}}</h3>
+                {% endfor %}
+                 {% for comment in comments %}
                     <p class="comment">{{comment.content}}</p>
                 {% endfor %} 
             </div>

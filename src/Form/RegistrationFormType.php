@@ -35,14 +35,16 @@ class RegistrationFormType extends AbstractType
             ])
             ->add('photo', FileType::class, [
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'form-control',
+                    'placeholder'=> "jpg et png de moins de max 1mo"
+
                 ],
                 'label' => 'Image du profil',
                 'constraints' => [
                     new File([
                         'maxSize' => '1024k',
                         'mimeTypes' => [
-                            'image/jpg',
+                            'image/jpeg',
                             'image/png'
                         ],
                         'mimeTypesMessage' => 'Seuls les formats jpg et png sont authorisés',

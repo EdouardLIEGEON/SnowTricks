@@ -2,7 +2,10 @@
 
 namespace App\Controller;
 use App\Entity\Tricks;
+use App\Entity\Users;
+use App\Entity\Comments;
 use App\Form\CreateTrickType;
+use App\Form\UpdateTrickType;
 use App\Repository\TricksRepository;
 use App\Repository\CommentsRepository;
 use App\Repository\UsersRepository;
@@ -70,46 +73,75 @@ class TricksController extends AbstractController
             $entityManager->flush();
 
             return $this->redirect('/tricks');
-
         }
 
         return $this->render('/tricks/create.html.twig', [ 'CreateTrick' => $form->createView()]);
     }
 
-    #[Route('/update', name:'update')]
-    public function update(ManagerRegistry $doctrine, Request $request, SluggerInterface $slugger): Response
+    #[Route('/update/{id}', name:'update')]
+    public function update(ManagerRegistry $doctrine, Request $request, SluggerInterface $slugger, Tricks $tricks): Response
     {
         $entityManager = $doctrine->getManager();
-        $tricks = new Tricks();
-        $form = $this->createForm(CreateTrickType::class, $tricks);
+        $form = $this->createForm(UpdateTrickType::class, $tricks);
         $form->handleRequest($request);
 
-        return $this->render('/tricks/update.html.twig', [ 'UpdateTrick' => $form->createView()]);
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $setName = $form->get('name')->getData();
+            $setDescription = $form->get('description')->getData();
+            $setType = $form->get('type')->getData();
+            $setPhoto = $form->get('photo')->getData();
+            $setVideo = $form->get('video')->getData();
+
+            // this condition is needed because the 'brochure' field is not required
+            // so the PDF file must be processed only when a file is uploaded
+            if ($setPhoto) {
+                $originalFilename = pathinfo($setPhoto->getClientOriginalName(), PATHINFO_FILENAME);
+                // this is needed to safely include the file name as part of the URL
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$setPhoto->guessExtension();
+
+                // Move the file to the directory where brochures are stored
+                try {
+                    $setPhoto->move(
+                        $this->getParameter('UpdateTrick_photo'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during file upload
+                }
+
+                // updates the 'brochureFilename' property to store the PDF file name
+                // instead of its contents
+                $tricks->setPhoto($newFilename);
+            }
+            $entityManager->persist($tricks);
+            $entityManager->flush();
+
+            return $this->redirect('/tricks');
+        }
+        return $this->render('/tricks/update.html.twig', [ 'tricks'=> $tricks, 'UpdateTrick' => $form->createView()]);
 
     }
 
     #[Route('/delete/{id}', name: 'delete')]
-    public function delete(Tricks $tricks = null, ManagerRegistry $doctrine): RedirectResponse
+    public function delete(Tricks $tricks, ManagerRegistry $doctrine): RedirectResponse
     {
         if($tricks){
             $manager = $doctrine->getManager();
             $manager->remove($tricks);
             $manager->flush();
-            $this->addFlash(type:'success', message: 'Le trick est supprimé avec succès');
 
-        }else{
-
-            $this->addFlash(type:'error', message: 'Le trick est inexistant');
-
+            return $this->redirect('/tricks');
         }
-        return $this->redirect('/tricks');
     }
 
     #[Route('/trick/{name}', name: 'single')]
-    public function single(Tricks $tricks, CommentsRepository $commentsRepository): Response
+    public function single(Tricks $tricks, CommentsRepository $commentsRepository,UsersRepository $usersRepository, Comments $comments): Response
     {
-         return $this->render('/tricks/single.html.twig', ['tricks'=> $tricks, 'comments'=> $commentsRepository->findBy(['tricks_Id' =>$tricks->id])]);
+         return $this->render('/tricks/single.html.twig', ['tricks'=> $tricks, 
+         'comments'=> $commentsRepository->findBy(['tricks_Id' =>$tricks->id]),
+          'users'=>$usersRepository->findBy(['id'=>$comments->users_id])]);
     }
-    
     
 }

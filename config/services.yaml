@@ -6,6 +6,7 @@
 parameters:
     tricks_photo: '%kernel.project_dir%/public/img'
     users_photo: '%kernel.project_dir%/public/img'
+    UpdateTrick_photo: '%kernel.project_dir%/public/img'
 
 
 services:
