@@ -3,16 +3,16 @@
 {% block title %}{{ tricks.name }} | {% endblock %}
 
 {% block body %}
-{% if app.user %}
+{# {% if app.user %} #}
     <div class="row" style="background:transparent;">
         <div class="col-10">
         </div>
-        <div class="col-2"><a href="/tricks/update" class="links_tricks"><img src="/img/update.png"></a>
-            <a class="button links_tricks" href="#popup1"><img src="/img/delete.png"></a>
+        <div class="col-2"><a href="/tricks/update/{{tricks.id}}" class="links_tricks"><img src="/img/update.png"></a>
+            <a class="button links_tricks" href="#popup1/{{tricks.id}}"><img src="/img/delete.png"></a>
         </div>
     </div>    
-    {% else %}
-    {% endif %}
+    {# {% else %}
+    {% endif %} #}
     <header id='tricks'>
         <h1>{{ tricks.name }}</h1>
     </header>
@@ -53,7 +53,7 @@
             <div class="col-2">
                 <div class="bottom">
                     <h3>Modifié le</h3>
-                        <p>{{tricks.created_at|date("d/m/Y")}}</p>
+                        <p>{{tricks.updated_at|date("d/m/Y")}}</p>
                     <p></p>
                 </div>
             </div>
@@ -61,31 +61,34 @@
 
         <div class="row single ">
             <h2>Discussions sur "{{tricks.name}}"</h2>
-            <div class="col-3">
-            </div>
-            <div class="col-6 comments">
-                {% for user in users %}
-                    <img src='/img/{{user.photo}}'>
-                    <h3>{{user.name}}</h3>
-                {% endfor %}
-                 {% for comment in comments %}
+            <div class="col-6 offset-3 comments">
+                {% for comment in comments %}
                     <p class="comment">{{comment.content}}</p>
                 {% endfor %} 
             </div>
-            <div class="col-3">
-            </div>
         </div>
 
+        {% if app.user %}
+            <div class="row form-single">
+                <div class="col-6 offset-3 ">
+                        {{ form_start(AddComment) }}
+                            {{ form_row(AddComment.comment) }}
+                            <button type="submit" class="btn btn-lg btn-primary my-3">Ajouter un commentaire</button>
+                        {{ form_end(AddComment) }}
+                </div>
+            </div>
+        {% else %}
+        {% endif %}
     </section>
-    <div id="popup1" class="overlay">
+    <div id="popup1/{{tricks.id}}" class="overlay">
         <div class="popup container-fluid">
             <h2>On supprime vraiment ce trick ?</h2>
                 <div class="row">
                     <div class="col-2 offset-4">
-                        <button class="btn btn-primary"><a class="close" href="/tricks/delete">Oui</a></button>
+                        <button class="btn btn-primary"><a class="close" href="/tricks/delete/{{tricks.id}}">Oui</a></button>
                     </div>
                     <div class="col-2">
-                        <button class="btn btn-primary"><a class="close" href="/tricks/{{tricks.name}}">Non</a></button>
+                        <button class="btn btn-primary"><a class="close" href="/tricks/trick/{{tricks.name}}">Non</a></button>
                     </div>
                     <div class="col-4">
                     </div>

@@ -4,6 +4,18 @@
 
 {% block body %}
 <header>
+{% if app.user %}
+                        <div class="mb-3">
+                        <p> Salut <span class="pseudo_connect"> {{ app.user.name }} </span>!</p>
+                        </div>
+                    {% endif %}
+{# {% for label, message in app.flashes(['success','error']) %}
+    {% for message in messages %}
+        <div class="flash-notice">
+            {{ message }}
+        </div>
+    {%  endfor %}
+{% endfor %} #}
 <h1 class="title_header">Snowtricks</h1>
 <h2>Pour les accros de la glisse  !</h2>
 </header>

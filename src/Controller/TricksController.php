@@ -2,14 +2,14 @@
 
 namespace App\Controller;
 use App\Entity\Tricks;
-use App\Entity\Users;
 use App\Entity\Comments;
+use App\Entity\Users;
 use App\Form\CreateTrickType;
 use App\Form\UpdateTrickType;
+use App\Form\AddCommentType;
 use App\Repository\TricksRepository;
 use App\Repository\CommentsRepository;
-use App\Repository\UsersRepository;
-use Doctrine\ORM\EntityManager;
+use DateTime;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -18,7 +18,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
-
 
 #[Route('/tricks', name: 'tricks_')]
 class TricksController extends AbstractController
@@ -69,6 +68,8 @@ class TricksController extends AbstractController
                 // instead of its contents
                 $tricks->setPhoto($newFilename);
             }
+            $tricks->created_at = new DateTime();
+            $tricks->updated_at = new DateTime();
             $entityManager->persist($tricks);
             $entityManager->flush();
 
@@ -115,6 +116,7 @@ class TricksController extends AbstractController
                 // instead of its contents
                 $tricks->setPhoto($newFilename);
             }
+            $tricks->updated_at = new DateTime();
             $entityManager->persist($tricks);
             $entityManager->flush();
 
@@ -125,7 +127,7 @@ class TricksController extends AbstractController
     }
 
     #[Route('/delete/{id}', name: 'delete')]
-    public function delete(Tricks $tricks, ManagerRegistry $doctrine): RedirectResponse
+    public function delete(Tricks $tricks, ManagerRegistry $doctrine, ): RedirectResponse
     {
         if($tricks){
             $manager = $doctrine->getManager();
@@ -137,11 +139,14 @@ class TricksController extends AbstractController
     }
 
     #[Route('/trick/{name}', name: 'single')]
-    public function single(Tricks $tricks, CommentsRepository $commentsRepository,UsersRepository $usersRepository, Comments $comments): Response
+    public function single(Tricks $tricks, CommentsRepository $commentsRepository, Request $request ): Response
     {
+        $form = $this->createForm(AddCommentType::class);
+        $form->handleRequest($request);
+
          return $this->render('/tricks/single.html.twig', ['tricks'=> $tricks, 
          'comments'=> $commentsRepository->findBy(['tricks_Id' =>$tricks->id]),
-          'users'=>$usersRepository->findBy(['id'=>$comments->users_id])]);
+         'AddComment' => $form->createView()]);
     }
     
 }

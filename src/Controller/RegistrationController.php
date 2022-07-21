@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Users;
+use App\Repository\UsersRepository;
 use App\Form\RegistrationFormType;
 use App\Security\UsersAuthenticator;
 use Doctrine\ORM\EntityManagerInterface;
@@ -12,19 +13,22 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
-use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use App\Services\Mailer;
+use Doctrine\Persistence\ManagerRegistry;
 
 class RegistrationController extends AbstractController
 {
     #[Route('/register', name: 'app_register')]
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, 
-    UserAuthenticatorInterface $userAuthenticator, UsersAuthenticator $authenticator, EntityManagerInterface $entityManager, SluggerInterface $slugger): Response
+    UserAuthenticatorInterface $userAuthenticator, UsersAuthenticator $authenticator, SluggerInterface $slugger, Mailer $mailer, ManagerRegistry $doctrine): Response
     {
+        $entityManager = $doctrine->getManager();
         $user = new Users();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
+        $this->mailer = $mailer;
 
         if ($form->isSubmitted() && $form->isValid()) {
             // encode the plain password
@@ -34,7 +38,9 @@ class RegistrationController extends AbstractController
                     $form->get('plainPassword')->getData()
                 )
             );
+            $user->setToken($this->generateToken());
             $setPhoto = $form->get('photo')->getData();
+            
 
             if ($setPhoto) {
                 $originalFilename = pathinfo($setPhoto->getClientOriginalName(), PATHINFO_FILENAME);
@@ -48,27 +54,53 @@ class RegistrationController extends AbstractController
                         $this->getParameter('users_photo'),
                         $newFilename
                     );
-                } catch (FileException $e) {
+                } catch (FileException $e){
                     // ... handle exception if something happens during file upload
                 }
 
                 // updates the 'brochureFilename' property to store the PDF file name
                 // instead of its contents
                 $user->setPhoto($newFilename);
+                $entityManager->persist($user);
+                $entityManager->flush();
             }
-            $entityManager->persist($user);
-            $entityManager->flush();
-            // do anything else you need here, like send an email
+            
+            $this->mailer->sendEmail($user->getEmail(), $user->getToken());
 
-            return $userAuthenticator->authenticateUser(
-                $user,
-                $authenticator,
-                $request
-            );
         }
+        
 
         return $this->render('registration/register.html.twig', [
             'registrationForm' => $form->createView(),
         ]);
     }
+ 
+    private function generateToken()
+    {
+        return rtrim(strtr(base64_encode(random_bytes(length: 32)), '+/', '-_'), '=');
+    }
+
+    #[Route('/confirm-account?token={token}', name: 'confirm_account')]
+    public function confirmAccount($token, EntityManagerInterface $entityManager, UsersRepository $usersRepository)
+    {
+        $user = $usersRepository->findOneBy(['token'=> $token]);
+
+        if($user) {
+            $user->setToken($token);
+            $user->setvalidate(validate:true);
+            $entityManager->persist($user);
+            $entityManager->flush();
+
+            return $this->redirect('/');
+            $this->addFlash('success', 'Inscription réussie');
+
+        } else {
+
+            return $this->redirect('/');
+            $this->addFlash('error', "Ce compte n'existe pas");
+
+        }
+        return $this->json($token);
+    }
+    
 }

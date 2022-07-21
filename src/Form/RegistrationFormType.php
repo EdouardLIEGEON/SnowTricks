@@ -36,7 +36,7 @@ class RegistrationFormType extends AbstractType
             ->add('photo', FileType::class, [
                 'attr' => [
                     'class' => 'form-control',
-                    'placeholder'=> "jpg et png de moins de max 1mo"
+                    'placeholder'=> "jpg et png de max 1mo"
 
                 ],
                 'label' => 'Image du profil',

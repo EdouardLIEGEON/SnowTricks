@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\TricksRepository;
+use DateTime;
+use Doctrine\ORM\Cache\Region\UpdateTimestampCache;
 use Doctrine\ORM\Mapping as ORM;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
@@ -30,7 +32,11 @@ class Tricks
     private $video;
 
     #[ORM\Column(type: 'date', nullable: true)]
-    private $created_at;
+    public $created_at;
+
+    #[ORM\Column(type: 'date', nullable: true, updatable:true)]
+    public $updated_at;
+
 
     public function getId(): ?int
     {
@@ -105,6 +111,18 @@ class Tricks
     public function setCreated_at(?\DateTimeInterface $created_at): self
     {
         $this->created_at = $created_at;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updated_at;
+    }
+
+    public function setUpdatedAt(?\DateTimeInterface $updated_at): self
+    {
+        $this->updated_at = $updated_at;
 
         return $this;
     }

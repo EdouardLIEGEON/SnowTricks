@@ -18,20 +18,17 @@ class Comments
     #[ORM\Column(type: 'datetime')]
     private $dateTime;
 
-    #[ORM\Column(type: 'string', length: 50)]
-    private $author;
 
     #[ORM\Column(type: 'string', length: 500)]
     private $content;
 
-    #[ORM\ManyToOne(targetEntity: tricks::class)]
+    #[ORM\ManyToOne(targetEntity: Tricks::class)]
     #[ORM\JoinColumn(nullable: false)]
     private $tricks_Id;
 
-    #[ORM\ManyToOne(targetEntity: Users::class, inversedBy: 'comments')]
+    #[ORM\ManyToOne(targetEntity: Users::class)]
     #[ORM\JoinColumn(nullable: false)]
     private $users_id;
-
 
     public function __construct()
     {
@@ -51,18 +48,6 @@ class Comments
     public function setDateTime(\DateTimeInterface $dateTime): self
     {
         $this->dateTime = $dateTime;
-
-        return $this;
-    }
-
-    public function getAuthor(): ?string
-    {
-        return $this->author;
-    }
-
-    public function setAuthor(string $author): self
-    {
-        $this->author = $author;
 
         return $this;
     }
@@ -91,15 +76,16 @@ class Comments
         return $this;
     }
 
-    public function getUsersId(): ?users
+    public function getUsersId(): ?Users
     {
         return $this->users_id;
     }
 
-    public function setUsersId(?users $users_id): self
+    public function setUsersId(?Users $users_id): self
     {
         $this->users_id = $users_id;
 
         return $this;
     }
+
 }

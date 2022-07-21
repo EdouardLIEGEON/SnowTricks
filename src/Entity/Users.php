@@ -14,6 +14,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
 class Users implements PasswordAuthenticatedUserInterface
 {
+    
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
@@ -31,15 +32,14 @@ class Users implements PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string', length: 50)]
     private $name;
 
-    #[ORM\OneToMany(mappedBy: 'users_id', targetEntity: Comments::class)]
-    private $comments;
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $token;
+    
 
+    #[ORM\Column(type: 'boolean', nullable: true)]
+    private $validate;
 
-    public function __construct()
-    {
-        $this->comments = new ArrayCollection();
-    }
-
+    
     public function getId(): ?int
     {
         return $this->id;
@@ -115,33 +115,33 @@ class Users implements PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * @return Collection<int, Comments>
-     */
-    public function getComments(): Collection
+    public function getToken(): ?string
     {
-        return $this->comments;
+        return $this->token;
     }
 
-    public function addComment(Comments $comment): self
+    public function setToken(?string $token): self
     {
-        if (!$this->comments->contains($comment)) {
-            $this->comments[] = $comment;
-            $comment->setUsersId($this);
-        }
+        $this->token = $token;
 
         return $this;
     }
 
-    public function removeComment(Comments $comment): self
+    public function getValidate(): ?bool
     {
-        if ($this->comments->removeElement($comment)) {
-            // set the owning side to null (unless already changed)
-            if ($comment->getUsersId() === $this) {
-                $comment->setUsersId(null);
-            }
-        }
+        return $this->validate;
+    }
+
+    public function setValidate(?bool $validate): self
+    {
+        $this->validate = $validate;
 
         return $this;
     }
+    
+    public function __toString()
+    {
+        return $this->name;
+    }
+
 }
