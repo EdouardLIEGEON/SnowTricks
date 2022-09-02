@@ -11,7 +11,7 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UsersRepository::class)]
-#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
+#[UniqueEntity(fields: ['email'], message: 'Il y a déjà un compte avec cet email')]
 class Users implements PasswordAuthenticatedUserInterface
 {
     
@@ -139,9 +139,5 @@ class Users implements PasswordAuthenticatedUserInterface
         return $this;
     }
     
-    public function __toString()
-    {
-        return $this->name;
-    }
 
 }

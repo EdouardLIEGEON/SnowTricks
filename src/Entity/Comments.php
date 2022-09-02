@@ -76,12 +76,12 @@ class Comments
         return $this;
     }
 
-    public function getUsersId(): ?Users
+    public function getUsersId(): ?users
     {
         return $this->users_id;
     }
 
-    public function setUsersId(?Users $users_id): self
+    public function setUsersId(?users $users_id): self
     {
         $this->users_id = $users_id;
 

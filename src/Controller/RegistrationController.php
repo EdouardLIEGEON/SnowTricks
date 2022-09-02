@@ -17,6 +17,7 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use App\Services\Mailer;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class RegistrationController extends AbstractController
 {
@@ -86,21 +87,20 @@ class RegistrationController extends AbstractController
         $user = $usersRepository->findOneBy(['token'=> $token]);
 
         if($user) {
-            $user->setToken($token);
+            $user->setToken("");
             $user->setvalidate(validate:true);
             $entityManager->persist($user);
             $entityManager->flush();
 
             return $this->redirect('/');
-            $this->addFlash('success', 'Inscription réussie');
+            $this->addFlash('success', 'Inscription réussie, vous pouvez maintenant vous connecter');
 
         } else {
 
             return $this->redirect('/');
-            $this->addFlash('error', "Ce compte n'existe pas");
+            $this->addFlash('error', "Ce compte n'existe pas ou a déjà été validé");
 
         }
         return $this->json($token);
-    }
-    
+    } 
 }

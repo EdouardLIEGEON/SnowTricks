@@ -4,6 +4,11 @@
 
 {% block body %}
 <section id="register">
+{% for message in app.flashes('error') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
                 <h1>S'enregistrer</h1>
     <div class="container" >
         <div class="row">
@@ -17,7 +22,7 @@
                         }) }}
                         <button type="submit" class="btn btn-lg btn-primary my-3">M'inscrire</button>
                     {{ form_end(registrationForm) }}
-                    <p class="form-text">Un mail sera envoyé sur l'adresse utilisée lors de la création du compte</p>
+                    <p class="form-text">Un mail sera envoyé sur l'adresse utilisée pour vous permettre de confirmer la création du compte</p>
             </div>
         </div>
     </div>

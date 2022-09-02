@@ -9,6 +9,7 @@ use App\Form\UpdateTrickType;
 use App\Form\AddCommentType;
 use App\Repository\TricksRepository;
 use App\Repository\CommentsRepository;
+use App\Repository\UsersRepository;
 use DateTime;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -139,14 +140,14 @@ class TricksController extends AbstractController
     }
 
     #[Route('/trick/{name}', name: 'single')]
-    public function single(Tricks $tricks, CommentsRepository $commentsRepository, Request $request ): Response
+    public function single(Tricks $tricks, CommentsRepository $commentsRepository, Request $request, UsersRepository $usersRepository, Comments $comments ): Response
     {
         $form = $this->createForm(AddCommentType::class);
         $form->handleRequest($request);
 
-         return $this->render('/tricks/single.html.twig', ['tricks'=> $tricks, 
-         'comments'=> $commentsRepository->findBy(['tricks_Id' =>$tricks->id]),
-         'AddComment' => $form->createView()]);
-    }
-    
+        return $this->render('/tricks/single.html.twig', ['tricks'=> $tricks, 
+        'comments'=> $commentsRepository->findBy(['tricks_Id' =>$tricks->id]),
+        'users'=> $usersRepository->findBy(['id'=>$comments->users_id]),
+        'AddComment' => $form->createView()]);
+    }   
 }

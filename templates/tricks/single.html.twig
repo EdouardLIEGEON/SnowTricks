@@ -62,6 +62,9 @@
         <div class="row single ">
             <h2>Discussions sur "{{tricks.name}}"</h2>
             <div class="col-6 offset-3 comments">
+                {# {% for users in user %}
+                <img src="{{user.photo}}">
+                {% endfor %} #}
                 {% for comment in comments %}
                     <p class="comment">{{comment.content}}</p>
                 {% endfor %} 

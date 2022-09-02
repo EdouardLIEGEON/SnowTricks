@@ -106,6 +106,7 @@ p{
   border: solid 2px #e2fcfb;
   color: blue;
   font-family: olivier;
+  text-decoration: none;
 }
 form .btn-primary{
   width: 200px;
@@ -117,12 +118,12 @@ form .btn-primary{
   background-color: blue;
   border: solid 2px #e2fcfb;
   color: #e2fcfb;
+  text-decoration: none;
 }
 
 footer{
   margin-top: 50px;
   padding: 25px 0;
-  border-top: solid 2px #e2fcfb;
 }
 .logo_footer{
   font-family: olivier;
@@ -311,7 +312,7 @@ margin-bottom:25px;
 }
 .comment{
   font-family: olivier;
-  font-size:20px;
+  font-size:25px;
   color: blue;
   text-align: center;
   padding-left:20px;

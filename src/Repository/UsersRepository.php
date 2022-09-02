@@ -19,6 +19,20 @@ use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
  */
 class UsersRepository extends ServiceEntityRepository implements PasswordUpgraderInterface
 {
+    public function loadUserByIdentifier(string $usernameOrEmail): ?Users
+    {
+        $entityManager = $this->getEntityManager();
+
+        return $entityManager->createQuery(
+                'SELECT u
+                FROM App\Entity\Users u
+                WHERE u.username = :query
+                OR u.email = :query'
+            )
+            ->setParameter('query', $usernameOrEmail)
+            ->getOneOrNullResult();
+    }
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Users::class);
