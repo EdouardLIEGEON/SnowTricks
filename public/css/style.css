@@ -7,7 +7,7 @@
   font-family: lato;
   src: url("../fonts/lato.ttf") format("truetype");
 }
-html{
+body{
   overflow-x:hidden;
 }
 header, #register, #login{
@@ -122,7 +122,7 @@ form .btn-primary{
 }
 
 footer{
-  margin-top: 50px;
+  margin-top: 25px;
   padding: 25px 0;
 }
 .logo_footer{
@@ -171,16 +171,76 @@ label{
   font-size: 25px;
  position: absolute;
 }
+.trick {
+  position: relative;
+  display: inline-block;
+  width: 500px;
+  max-width: 500px;
+  height: 300px;
+  max-height: 300px;
+  transform: translateZ(0);
+  overflow: hidden;
+  margin: auto;
+  margin-top: 50px;
+}
+
+.trick:hover,
+.trick *,
+.trick:before,
+.trick:after {
+  box-sizing: border-box;
+  transition: all 0.3s linear;
+}
+
+.trick img {
+  width: 500px;
+  max-width:500px;
+  height: 300px;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+  background-position: center;
+}
+
+.trick:hover > img {
+  transform: scale(1);
+  transition: 1.5s;
+}
+
+.trick figcaption {
+  position: absolute;
+  max-width: 500px;
+  width: 500px;
+  height: 300px;
+  top: 67%;
+  left: 0px;
+  opacity: 0;
+  overflow: hidden;
+  z-index: 11;
+  margin-left:1%;
+}
+.trick figcaption .content {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.trick figcaption a {
+  text-decoration: none;
+  color: #53afe0;
+}
+
+.trick:hover figcaption,
+.trick:hover figcaption {
+  opacity: 1;
+  transform: translateX(0);
+  transition: 1, 5s;
+}
 .trick{
   margin-top: 100px;
 }
 .tricks{
   display: flex;  
 }
-.photo_tricks{
-  width: 450px;
-  height: 250px;
-}
+
 .tricks h2{
   text-align: left !important;
   font-size: 35px;
@@ -191,7 +251,7 @@ label{
 }
 .tricks{
   background: #e2fcfb;
-  width: 450px;
+  width: 98%;
   height: 100px;
   padding-top: 35px;
 }
@@ -199,9 +259,12 @@ label{
 width:30px;
 height:30px;
 }
-.single img{
+.single img, iframe{
 width: 600px;
 height: 400px;
+display:block;
+  margin-left:auto;
+  margin-right:auto;
 }
 .single{
   margin: 100px 0;
@@ -265,7 +328,8 @@ height: 400px;
 #scroll_to_down{
   margin: 25vh;
   display: block;
-  margin-left: 45vw;
+  margin-left:45%;
+  margin-right:45%;
 }
 .popup {
   margin: 70px auto;
@@ -330,6 +394,7 @@ margin-bottom:25px;
 }
 .form-single{
 background: blue !important;
+padding:2rem 5rem;
 }
 .form-text{
   color:#ffff;
@@ -338,6 +403,38 @@ background: blue !important;
   font-size: 25px; 
 }
 
+
+
+/*Responsive*/
+@media (max-width:1500px){
+
+}
+@media (max-width:1360px){
+  #tricks h1{
+    font-size:75px;
+  }
+ 
+}
+@media (max-width:1000px){
+  h1.title_header,h1{
+    font-size:150px;
+  }
+  #tricks h1{
+    font-size:50px;
+  }
+  #scroll_to_down{
+    margin-left:42%;
+  }
+  #login, #register{
+    height:150vh;
+  }
+}
+@media (max-width:775px){
+  .form-control{
+    width:50%;
+    font-size:15px;
+  }
+}
 @media screen and (max-width: 700px){
   .box{
     width: 70%;
@@ -346,5 +443,53 @@ background: blue !important;
     width: 70%;
   }
 }
+@media (max-width:675px){
+  h1.title_header,h1{
+    font-size:100px;
+  }
+  .trick, .trick img{
+  width: 350px;
+  height:250px;
+  }
+  .links_tricks img{
+    width:30px;
+    height:30px;
+  }
+  #scroll_to_down{
+    margin-left:35%;
+  }
+  label{
+    font-size: 20px;
+  }
+  .single img, iframe{
+    width:400px;
+    height:300px;
+  }
+  .form-single{
+    padding:2rem 1rem;
+    }
+}
+@media (max-width:450px){
+  h1.title_header, h1{
+    font-size:75px;
+  }
+  #tricks h1{
+    font-size:35px;
+  }
+  #scroll_to_down{
+    margin-left:25%;
+  }
+  label{
+    font-size: 12px;
+  }
+  .form-control{
+    width:60%;
+  }
+  .single img, iframe{
+    width:300px;
+    height:200px;
+  }
+}
+
 
 

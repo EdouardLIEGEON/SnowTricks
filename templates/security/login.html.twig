@@ -4,6 +4,11 @@
 
 {% block body %}
 <section id="login">
+{% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
                         <h1>Se connecter</h1>
     <div class="container my-3">
         <div class="row">

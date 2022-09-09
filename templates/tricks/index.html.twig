@@ -9,43 +9,46 @@
             <a href="#Tricks"><img src="../img/down.png" alt="Descendre" /></a>
         </div>
     </header>
-        <section class='container-fluid' id="Tricks">
-            <div class="row">
-                {% for trick in tricks %}
-                <div class="col-3 trick">
+    <section class='container-fluid' id="Tricks">
+        <div class="row">
+            {% for trick in tricks %}
+            <div class="col-lg-4 col-sm-2 trick">
+                <figure>
                     <img class="photo_tricks" src="/img/{{trick.photo}}">
-                    <div class="container-fluid tricks">
-                        <div class="col-10"><a href="/tricks/trick/{{trick.name}}"><h2>{{trick.name}}</h2></a></div>
-                        {# {% if app.user %} #}
-                        <div class="col-2"><a href="/tricks/update/{{trick.id}}" class="links_tricks"><img src="/img/update.png"></a>
-                            <a class="button links_tricks" href="#popup1/{{trick.id}}"><img src="/img/delete.png"></a>
+                    <figcaption>
+                        <div class="container-fluid tricks">
+                            <a href="/tricks/trick/{{trick.name}}"><h2>{{trick.name}}</h2></a>
+                            {# {% if app.user %} #}
+                            <a href="/tricks/update/{{trick.id}}" class="links_tricks"><img src="/img/update.png"></a>
+                                <a class="button links_tricks" href="#popup1/{{trick.id}}"><img src="/img/delete.png"></a>
+                            {# {% else %}
+                            {% endif %} #}
                         </div>
-                        {# {% else %}
-                        {% endif %} #}
-                    </div>
+                    </figcaption>
+                </figure>
+            </div>
+            <div id="popup1/{{trick.id}}" class="overlay">
+                <div class="popup container-fluid">
+                    <h2>On supprime vraiment ce trick ?</h2>
+                        <div class="row">
+                            <div class="col-2 offset-4">
+                                <button class="btn btn-primary"><a class="close" href="/tricks/delete/{{trick.id}}">Oui</a></button>
+                            </div>
+                            <div class="col-2">
+                                <button class="btn btn-primary"><a class="close" href="/tricks">Non</a></button>
+                            </div>
+                            <div class="col-4">
+                            </div>
+                        </div>
                 </div>
-                <div id="popup1/{{trick.id}}" class="overlay">
-            <div class="popup container-fluid">
-                <h2>On supprime vraiment ce trick ?</h2>
-                    <div class="row">
-                        <div class="col-2 offset-4">
-                            <button class="btn btn-primary"><a class="close" href="/tricks/delete/{{trick.id}}">Oui</a></button>
-                        </div>
-                        <div class="col-2">
-                            <button class="btn btn-primary"><a class="close" href="/tricks">Non</a></button>
-                        </div>
-                        <div class="col-4">
-                        </div>
-                    </div>
+            </div>
+            {% endfor %}
+            <div class="col-2 offset-1 trick row align-items-center">
+                <button class="btn btn-primary"><a class="create" href="/tricks/create">Créer un nouveau Trick</a></button>
             </div>
         </div>
-                {% endfor %}
-                <div class="col-2 offset-1 trick row align-items-center">
-                    <button class="btn btn-primary"><a class="create" href="/tricks/create">Créer un nouveau Trick</a></button>
-                </div>
+            <div id="scroll_to_top">
+                <a href="#tricks"><img src="../img/scrolltop.png" alt="Retourner en haut" /></a>
             </div>
-                <div id="scroll_to_top">
-                    <a href="#tricks"><img src="../img/scrolltop.png" alt="Retourner en haut" /></a>
-                </div>
     </section>
 {% endblock %}

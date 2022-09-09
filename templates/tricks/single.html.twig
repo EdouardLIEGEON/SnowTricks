@@ -18,39 +18,35 @@
     </header>
     <section class="container-fluid single-trick">
         <div class="row single">
-            <div class="col-2">
-            </div>
-            <div class="col-4">
+            <div class="col-lg-6 col-sm-12">
                 <h2>Photo</h2>
                 <img src="/img/{{tricks.photo}}">
             </div>
-            <div class="col-4">
+            <div class="col-lg-6 col-12">
                 <h2>Vidéo</h2>
-                <iframe width="600" height="400" src="{{tricks.video}}" 
+                <iframe  src="{{tricks.video}}" 
                 title="YouTube video player" frameborder="0" 
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                 allowfullscreen></iframe>
             </div> 
-            <div class="col-2">
-            </div>
         </div>
         <div class="row single blue">
             <div class="col-12 description">
                 <p>{{tricks.description}}<p>
             </div>
-            <div class="col-2">
+            <div class="col-sm-4">
                 <div class="bottom">
                     <h3>Type de trick</h3>
                     <p>{{tricks.type}}</p>
                 </div>
             </div>
-            <div class="col-2">
+            <div class="col-sm-4">
                 <div class="bottom">
                     <h3>Créé le</h3>
                     <p>{{tricks.created_at|date("d/m/Y")}}</p>
                 </div>
             </div>
-            <div class="col-2">
+            <div class="col-sm-4">
                 <div class="bottom">
                     <h3>Modifié le</h3>
                         <p>{{tricks.updated_at|date("d/m/Y")}}</p>
@@ -61,7 +57,7 @@
 
         <div class="row single ">
             <h2>Discussions sur "{{tricks.name}}"</h2>
-            <div class="col-6 offset-3 comments">
+            <div class="comments">
                 {# {% for users in user %}
                 <img src="{{user.photo}}">
                 {% endfor %} #}
@@ -71,17 +67,15 @@
             </div>
         </div>
 
-        {% if app.user %}
+        {# {% if app.user %} #}
             <div class="row form-single">
-                <div class="col-6 offset-3 ">
                         {{ form_start(AddComment) }}
                             {{ form_row(AddComment.comment) }}
                             <button type="submit" class="btn btn-lg btn-primary my-3">Ajouter un commentaire</button>
                         {{ form_end(AddComment) }}
-                </div>
             </div>
-        {% else %}
-        {% endif %}
+        {# {% else %} #}
+        {# {% endif %} #}
     </section>
     <div id="popup1/{{tricks.id}}" class="overlay">
         <div class="popup container-fluid">
