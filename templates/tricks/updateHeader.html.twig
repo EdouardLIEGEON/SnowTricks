@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier le bandeau | {% endblock %}
+
+{% block body %}
+
+    <section id='tricks'>
+        <h1>Modifier le bandeau</h1>
+        <div class="container" >
+            <div class="row">
+                <div class="col form">
+                        {{ form_start(UpdateHeader) }}
+                            {{ form_row(UpdateHeader.header)}}
+                            <button type="submit" class="btn btn-lg btn-primary my-3">Modifier le Header</button>
+                        {{ form_end(UpdateHeader) }}
+                </div>
+            </div>
+        </div>
+
+    </section>
+{% endblock %}

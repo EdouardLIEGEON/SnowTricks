@@ -37,6 +37,9 @@ class Tricks
     #[ORM\Column(type: 'date', nullable: true, updatable:true)]
     public $updated_at;
 
+    #[ORM\Column(type:'string', length: 255, nullable: true)]
+    public  $header = null;
+
 
     public function getId(): ?int
     {
@@ -123,6 +126,18 @@ class Tricks
     public function setUpdatedAt(?\DateTimeInterface $updated_at): self
     {
         $this->updated_at = $updated_at;
+
+        return $this;
+    }
+
+    public function getHeader(): ?string
+    {
+        return $this->header;
+    }
+
+    public function setHeader(?string $header): self
+    {
+        $this->header = $header;
 
         return $this;
     }

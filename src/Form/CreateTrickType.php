@@ -59,7 +59,26 @@ class CreateTrickType extends AbstractType
                     'class' => 'form-control',
                     'placeholder'=> "Récupérez l'url de partage de la vidéo "
                 ],
-                'label' => 'Lien vers la video du Trick']);
+                'label' => 'Lien vers la video du Trick'])
+                ->add('header', FileType::class , [
+                    'attr' => [
+                        'class' => 'form-control',
+                        'placeholder'=> "jpg et png de moins de max 1mo"
+                    ],
+                    'label' => 'Bandeau du Trick',
+                    'mapped'=>false,
+                    'required'=>false,
+                    'constraints' => [
+                        new File([
+                            'maxSize' => '1024k',
+                            'mimeTypes' => [
+                                'image/jpeg',
+                                'image/png',
+                            ],
+                            'mimeTypesMessage' => 'Seuls les formats jpg et png sont authorisés',
+                        ])
+                    ]
+                        ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

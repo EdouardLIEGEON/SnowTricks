@@ -245,6 +245,7 @@ label{
   text-align: left !important;
   font-size: 35px;
   color: blue;
+  padding-right:1.2rem;
 }
 .tricks a{
   text-decoration: none;
@@ -295,6 +296,15 @@ display:block;
   text-align: center;
   font-family: olivier;
   font-size:25px;
+}
+.comments{
+margin:6rem 0;
+}
+.comments p{
+  padding:1.2rem 0 0 3rem;
+}
+.comments img{
+  border-radius : 75px;
 }
 #scroll_to_top {
   width: 200px;
@@ -374,12 +384,11 @@ margin-bottom:25px;
   display: inline-flex;
   align-items: center;
 }
-.comment{
+.comments p{
   font-family: olivier;
   font-size:25px;
   color: blue;
   text-align: center;
-  padding-left:20px;
 }
 .comments img{
   width:50px;

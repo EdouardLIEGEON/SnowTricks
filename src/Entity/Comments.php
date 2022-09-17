@@ -26,9 +26,10 @@ class Comments
     #[ORM\JoinColumn(nullable: false)]
     private $tricks_Id;
 
-    #[ORM\ManyToOne(targetEntity: Users::class)]
+
+    #[ORM\ManyToOne(inversedBy: 'comments')]
     #[ORM\JoinColumn(nullable: false)]
-    private $users_id;
+    private ?Users $users = null;
 
     public function __construct()
     {
@@ -76,14 +77,14 @@ class Comments
         return $this;
     }
 
-    public function getUsersId(): ?users
+    public function getUsers(): ?Users
     {
-        return $this->users_id;
+        return $this->users;
     }
 
-    public function setUsersId(?users $users_id): self
+    public function setUsers(?Users $users): self
     {
-        $this->users_id = $users_id;
+        $this->users = $users;
 
         return $this;
     }

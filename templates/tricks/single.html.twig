@@ -4,23 +4,41 @@
 
 {% block body %}
 {# {% if app.user %} #}
-    <div class="row" style="background:transparent;">
-        <div class="col-10">
+    <div class="row" style="background:transparent;border-top:solid 1px blue; padding-top:1rem">
+        <div class="col-8">
         </div>
-        <div class="col-2"><a href="/tricks/update/{{tricks.id}}" class="links_tricks"><img src="/img/update.png"></a>
+        <div class="col-2">
+        <p style="color:blue">Personnaliser le bandeau :</p>
+        </div>
+        <div class="col-2"><a href="{{path('updateHeader', {"id": tricks .id})}}" class="links_tricks"><img src="/img/update.png"></a>
             <a class="button links_tricks" href="#popup1/{{tricks.id}}"><img src="/img/delete.png"></a>
         </div>
     </div>    
     {# {% else %}
     {% endif %} #}
-    <header id='tricks'>
-        <h1>{{ tricks.name }}</h1>
+    <header id='tricks' style="background: url(/img/{{tricks.header}});background-attachment: fixed;background-position: center;background-repeat: no-repeat;background-size: cover;">
+        <h1>{{tricks.name}}</h1>
     </header>
     <section class="container-fluid single-trick">
         <div class="row single">
             <div class="col-lg-6 col-sm-12">
                 <h2>Photo</h2>
                 <img src="/img/{{tricks.photo}}">
+                {# {% if app.user %} #}
+                <div class="row" style="padding:1rem 0">
+                    <div class="col-5">
+                    </div>
+                        <div class="col-1">
+                            <a href="{{path('updatePhoto', {"id": tricks .id})}}" class="links_tricks"><img style="width:30px; height:30px;" src="/img/update.png"></a>
+                        </div>
+                        <div class="col-1">
+                            <a class="button links_tricks" href="#popup2/{{tricks.id}}"><img style="width:30px; height:30px;" src="/img/delete.png"></a>
+                        </div>
+                        <div class="col-5">
+                    </div>
+                </div> 
+                {# {% else %}
+                {% endif %} #}  
             </div>
             <div class="col-lg-6 col-12">
                 <h2>Vidéo</h2>
@@ -28,6 +46,22 @@
                 title="YouTube video player" frameborder="0" 
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                 allowfullscreen></iframe>
+                {# {% if app.user %} #}
+                <div class="row" style="padding:1rem 0">
+                    <div class="col-5">
+                    </div>
+                        <div class="col-1">
+                            <a href="{{path('updateVideo', {"id": tricks .id})}}" class="links_tricks"><img style="width:30px; height:30px;" src="/img/update.png"></a>
+                        </div>
+                        <div class="col-1">
+                            <a class="button links_tricks" href="#popup3/{{tricks.id}}"><img style="width:30px; height:30px;" src="/img/delete.png"></a>
+                        </div>
+                        <div class="col-5">
+                    </div>
+                </div> 
+                {# {% else %}
+                {% endif %} #}  
+            </div>
             </div> 
         </div>
         <div class="row single blue">
@@ -55,20 +89,20 @@
             </div>
         </div>
 
-        <div class="row single ">
-            <h2>Discussions sur "{{tricks.name}}"</h2>
+    <div class="container">
+        <div class="row single_comment ">
+            <h2>Discussions à propos de "{{tricks.name}}"</h2>
             <div class="comments">
-                {# {% for users in user %}
-                <img src="{{user.photo}}">
-                {% endfor %} #}
                 {% for comment in comments %}
-                    <p class="comment">{{comment.content}}</p>
+                <img class="img_comment" src="/img/{{comment.users.photo}}">
+                <p>{{comment.content}}</p>
                 {% endfor %} 
             </div>
         </div>
+    </div>
 
         {# {% if app.user %} #}
-            <div class="row form-single">
+            <div class="row form-single align-center">
                         {{ form_start(AddComment) }}
                             {{ form_row(AddComment.comment) }}
                             <button type="submit" class="btn btn-lg btn-primary my-3">Ajouter un commentaire</button>
@@ -79,10 +113,40 @@
     </section>
     <div id="popup1/{{tricks.id}}" class="overlay">
         <div class="popup container-fluid">
-            <h2>On supprime vraiment ce trick ?</h2>
+            <h2>On supprime vraiment le bandeau de ce trick ?</h2>
                 <div class="row">
                     <div class="col-2 offset-4">
-                        <button class="btn btn-primary"><a class="close" href="/tricks/delete/{{tricks.id}}">Oui</a></button>
+                        <button class="btn btn-primary"><a class="close" href="/tricks/deleteHeader/{{tricks.id}}">Oui</a></button>
+                    </div>
+                    <div class="col-2">
+                        <button class="btn btn-primary"><a class="close" href="/tricks/trick/{{tricks.name}}">Non</a></button>
+                    </div>
+                    <div class="col-4">
+                    </div>
+                </div>
+        </div>
+    </div>
+    <div id="popup2/{{tricks.id}}" class="overlay">
+        <div class="popup container-fluid">
+            <h2>On supprime vraiment la photo de ce trick ?</h2>
+                <div class="row">
+                    <div class="col-2 offset-4">
+                        <button class="btn btn-primary"><a class="close" href="/tricks/deletePhoto/{{tricks.id}}">Oui</a></button>
+                    </div>
+                    <div class="col-2">
+                        <button class="btn btn-primary"><a class="close" href="/tricks/trick/{{tricks.name}}">Non</a></button>
+                    </div>
+                    <div class="col-4">
+                    </div>
+                </div>
+        </div>
+    </div>
+    <div id="popup3/{{tricks.id}}" class="overlay">
+        <div class="popup container-fluid">
+            <h2>On supprime vraiment la vidéo de ce trick ?</h2>
+                <div class="row">
+                    <div class="col-2 offset-4">
+                        <button class="btn btn-primary"><a class="close" href="/tricks/deleteVideo/{{tricks.id}}">Oui</a></button>
                     </div>
                     <div class="col-2">
                         <button class="btn btn-primary"><a class="close" href="/tricks/trick/{{tricks.name}}">Non</a></button>
