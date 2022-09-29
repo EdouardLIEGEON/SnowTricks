@@ -4,11 +4,8 @@
 
 {% block body %}
 {# {% if app.user %} #}
-    <div class="row" style="background:transparent;border-top:solid 1px blue; padding-top:1rem">
-        <div class="col-8">
-        </div>
-        <div class="col-2">
-        <p style="color:blue">Personnaliser le bandeau :</p>
+    <div class="row" style="padding-top:1rem; margin: 0 0">
+        <div class="col-10">
         </div>
         <div class="col-2"><a href="{{path('updateHeader', {"id": tricks .id})}}" class="links_tricks"><img src="/img/update.png"></a>
             <a class="button links_tricks" href="#popup1/{{tricks.id}}"><img src="/img/delete.png"></a>
@@ -19,6 +16,7 @@
     <header id='tricks' style="background: url(/img/{{tricks.header}});background-attachment: fixed;background-position: center;background-repeat: no-repeat;background-size: cover;">
         <h1>{{tricks.name}}</h1>
     </header>
+    <a href="#popup4"><button class="btn-primary btn-medias">Afficher les médias</button></a>
     <section class="container-fluid single-trick">
         <div class="row single">
             <div class="col-lg-6 col-sm-12">
@@ -64,7 +62,7 @@
             </div>
             </div> 
         </div>
-        <div class="row single blue">
+        <div class="row single-blue">
             <div class="col-12 description">
                 <p>{{tricks.description}}<p>
             </div>
@@ -104,7 +102,7 @@
         {# {% if app.user %} #}
             <div class="row form-single align-center">
                         {{ form_start(AddComment) }}
-                            {{ form_row(AddComment.comment) }}
+                            {{ form_row(AddComment.content) }}
                             <button type="submit" class="btn btn-lg btn-primary my-3">Ajouter un commentaire</button>
                         {{ form_end(AddComment) }}
             </div>
@@ -154,6 +152,54 @@
                     <div class="col-4">
                     </div>
                 </div>
+        </div>
+    </div>
+    <div id="popup4" class="overlay">
+        <div class="popup medias container-fluid">
+           <div class="row single-mobile">
+           <a href="/tricks/trick/{{tricks.name}}" class="close-medias">X</a>
+            <div class="col-lg-6 col-sm-12">
+                <h2>Photo</h2>
+                <img src="/img/{{tricks.photo}}">
+                {# {% if app.user %} #}
+                <div class="row" style="padding:1rem 0">
+                    <div class="col-5">
+                    </div>
+                        <div class="col-1">
+                            <a href="{{path('updatePhoto', {"id": tricks .id})}}" class="links_tricks"><img style="width:30px; height:30px;" src="/img/update.png"></a>
+                        </div>
+                        <div class="col-1">
+                            <a class="button links_tricks" href="#popup2/{{tricks.id}}"><img style="width:30px; height:30px;" src="/img/delete.png"></a>
+                        </div>
+                        <div class="col-5">
+                    </div>
+                </div> 
+                {# {% else %}
+                {% endif %} #}  
+            </div>
+            <div class="col-lg-6 col-12">
+                <h2>Vidéo</h2>
+                <iframe  src="{{tricks.video}}" 
+                title="YouTube video player" frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen></iframe>
+                {# {% if app.user %} #}
+                <div class="row" style="padding:1rem 0">
+                    <div class="col-5">
+                    </div>
+                        <div class="col-1">
+                            <a href="{{path('updateVideo', {"id": tricks .id})}}" class="links_tricks"><img style="width:30px; height:30px;" src="/img/update.png"></a>
+                        </div>
+                        <div class="col-1">
+                            <a class="button links_tricks" href="#popup3/{{tricks.id}}"><img style="width:30px; height:30px;" src="/img/delete.png"></a>
+                        </div>
+                        <div class="col-5">
+                    </div>
+                </div> 
+                {# {% else %}
+                {% endif %} #}  
+            </div>
+            </div> 
         </div>
     </div>
 {% endblock %}

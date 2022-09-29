@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 use App\Entity\Tricks;
+use App\Entity\Comments;
 use App\Form\CreateTrickType;
 use App\Form\UpdateHeaderType;
 use App\Form\UpdatePhotoType;
@@ -12,8 +13,6 @@ use App\Repository\TricksRepository;
 use App\Repository\CommentsRepository;
 use DateTime;
 use Doctrine\Persistence\ManagerRegistry;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\DoctrineParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -107,17 +106,17 @@ class TricksController extends AbstractController
     public function update(ManagerRegistry $doctrine, Request $request, SluggerInterface $slugger, Tricks $tricks): Response
     {
         $entityManager = $doctrine->getManager();
-        $form = $this->createForm(UpdateTrickType::class, $tricks);
-        $form->handleRequest($request);
+        $updateForm = $this->createForm(UpdateTrickType::class, $tricks);
+        $updateForm->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($updateForm->isSubmitted() && $updateForm->isValid()) {
 
-            $setName = $form->get('name')->getData();
-            $setDescription = $form->get('description')->getData();
-            $setType = $form->get('type')->getData();
-            $setPhoto = $form->get('photo')->getData();
-            $setVideo = $form->get('video')->getData();
-            $setHeader = $form->get('header')->getData();
+            $setName = $updateForm->get('name')->getData();
+            $setDescription = $updateForm->get('description')->getData();
+            $setType = $updateForm->get('type')->getData();
+            $setPhoto = $updateForm->get('photo')->getData();
+            $setVideo = $updateForm->get('video')->getData();
+            $setHeader = $updateForm->get('header')->getData();
 
             // this condition is needed because the 'brochure' field is not required
             // so the PDF file must be processed only when a file is uploaded
@@ -167,19 +166,19 @@ class TricksController extends AbstractController
 
             return $this->redirect('/tricks');
         }
-        return $this->render('/tricks/update.html.twig', [ 'tricks'=> $tricks, 'UpdateTrick' => $form->createView()]);
+        return $this->render('/tricks/update.html.twig', [ 'tricks'=> $tricks, 'UpdateTrick' => $updateForm->createView()]);
     }
 
     #[Route('/updateHeader/{id}', name:'updateHeader')]
     public function updateHeader(ManagerRegistry $doctrine, Request $request, SluggerInterface $slugger, Tricks $tricks): Response
     {
         $entityManager = $doctrine->getManager();
-        $form = $this->createForm(UpdateHeaderType::class, $tricks);
-        $form->handleRequest($request);
+        $updateHeaderForm = $this->createForm(UpdateHeaderType::class, $tricks);
+        $updateHeaderForm->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($updateHeaderForm->isSubmitted() && $updateHeaderForm->isValid()) {
 
-            $setHeader = $form->get('header')->getData();
+            $setHeader = $updateHeaderForm->get('header')->getData();
 
             // this condition is needed because the 'brochure' field is not required
             // so the PDF file must be processed only when a file is uploaded
@@ -209,7 +208,7 @@ class TricksController extends AbstractController
 
             return $this->redirect('/tricks');
         }
-        return $this->render('/tricks/updateHeader.html.twig', [ 'tricks'=> $tricks, 'UpdateHeader' => $form->createView()]);
+        return $this->render('/tricks/updateHeader.html.twig', [ 'tricks'=> $tricks, 'UpdateHeader' => $updateHeaderForm->createView()]);
 
     }
 
@@ -217,12 +216,12 @@ class TricksController extends AbstractController
     public function updatePhoto(ManagerRegistry $doctrine, Request $request, SluggerInterface $slugger, Tricks $tricks): Response
     {
         $entityManager = $doctrine->getManager();
-        $form = $this->createForm(UpdatePhotoType::class, $tricks);
-        $form->handleRequest($request);
+        $updatePhotoForm = $this->createForm(UpdatePhotoType::class, $tricks);
+        $updatePhotoForm->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($updatePhotoForm->isSubmitted() && $updatePhotoForm->isValid()) {
 
-            $setPhoto = $form->get('photo')->getData();
+            $setPhoto = $updatePhotoForm->get('photo')->getData();
 
             // this condition is needed because the 'brochure' field is not required
             // so the PDF file must be processed only when a file is uploaded
@@ -252,7 +251,7 @@ class TricksController extends AbstractController
 
             return $this->redirect('/tricks');
         }
-        return $this->render('/tricks/updatePhoto.html.twig', [ 'tricks'=> $tricks, 'UpdatePhoto' => $form->createView()]);
+        return $this->render('/tricks/updatePhoto.html.twig', [ 'tricks'=> $tricks, 'UpdatePhoto' => $updatePhotoForm->createView()]);
 
     }
 
@@ -260,12 +259,12 @@ class TricksController extends AbstractController
     public function updateVideo(ManagerRegistry $doctrine, Request $request, SluggerInterface $slugger, Tricks $tricks): Response
     {
         $entityManager = $doctrine->getManager();
-        $form = $this->createForm(UpdateVideoType::class, $tricks);
-        $form->handleRequest($request);
+        $updateVideoForm = $this->createForm(UpdateVideoType::class, $tricks);
+        $updateVideoForm->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($updateVideoForm->isSubmitted() && $updateVideoForm->isValid()) {
 
-            $setVideo = $form->get('video')->getData();
+            $setVideo = $updateVideoForm->get('video')->getData();
 
             $tricks->updated_at = new DateTime();
             $entityManager->persist($tricks);
@@ -273,7 +272,7 @@ class TricksController extends AbstractController
 
             return $this->redirect('/tricks');
         }
-        return $this->render('/tricks/updateVideo.html.twig', [ 'tricks'=> $tricks, 'UpdateVideo' => $form->createView()]);
+        return $this->render('/tricks/updateVideo.html.twig', [ 'tricks'=> $tricks, 'UpdateVideo' => $updateVideoForm->createView()]);
 
     }
 
@@ -292,10 +291,10 @@ class TricksController extends AbstractController
     #[Route('/deleteHeader/{id}', name: 'deleteHeader')]
     public function deleteHeader(Tricks $tricks, ManagerRegistry $doctrine): RedirectResponse
     {
-        $header = $tricks->getHeader();
-        if($header){
+        if($tricks){
+            $tricks->setHeader("");
             $manager = $doctrine->getManager();
-            $manager->remove($header);
+            $manager->persist($tricks);
             $manager->flush();
 
             return $this->redirect('/tricks');
@@ -303,11 +302,12 @@ class TricksController extends AbstractController
     }
 
     #[Route('/deletePhoto/{id}', name: 'deletePhoto')]
-    public function deletePhotor(Tricks $tricks, ManagerRegistry $doctrine): RedirectResponse
+    public function deletePhoto(Tricks $tricks, ManagerRegistry $doctrine): RedirectResponse
     {
         if($tricks){
+            $tricks->setPhoto("");
             $manager = $doctrine->getManager();
-            $manager->remove($tricks);
+            $manager->persist($tricks);
             $manager->flush();
 
             return $this->redirect('/tricks');
@@ -318,8 +318,9 @@ class TricksController extends AbstractController
     public function deleteVideo(Tricks $tricks, ManagerRegistry $doctrine): RedirectResponse
     {
         if($tricks){
+            $tricks->setVideo("");
             $manager = $doctrine->getManager();
-            $manager->remove($tricks);
+            $manager->persist($tricks);
             $manager->flush();
 
             return $this->redirect('/tricks');
@@ -327,13 +328,27 @@ class TricksController extends AbstractController
     }
 
     #[Route('/trick/{name}', name: 'single')]
-    public function single(Tricks $tricks, CommentsRepository $commentsRepository, Request $request ): Response
+    public function single(Tricks $tricks, CommentsRepository $commentsRepository, Request $request, ManagerRegistry $doctrine): Response
     {
-        $form = $this->createForm(AddCommentType::class);
-        $form->handleRequest($request);
+        $entityManager = $doctrine->getManager();
+        $comments = new Comments();
+        $commentForm = $this->createForm(AddCommentType::class, $comments);
+        $commentForm->handleRequest($request);
 
-        return $this->render('/tricks/single.html.twig', ['tricks'=> $tricks, 
+        if ($commentForm->isSubmitted() && $commentForm->isValid()) {
+            $setContent = $commentForm->get('content')->getData();
+            $comments->setTricksId($tricks);
+            $comments->setUsers($_SESSION['']);
+        
+            $comments->dateTime = new DateTime();
+            $entityManager->persist($comments);
+            $entityManager->flush();
+
+            return $this->redirect('/tricks/trick/{id}');
+        }
+
+        return $this->render('/tricks/single.html.twig', ['tricks'=> $tricks,
         'comments'=> $commentsRepository->findBy(['tricks_Id' =>$tricks->id]),
-        'AddComment' => $form->createView()]);
+        'AddComment' => $commentForm->createView()]);
     }   
 }

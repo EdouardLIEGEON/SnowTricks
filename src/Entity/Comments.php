@@ -16,7 +16,7 @@ class Comments
     private $id;
 
     #[ORM\Column(type: 'datetime')]
-    private $dateTime;
+    public $dateTime;
 
 
     #[ORM\Column(type: 'string', length: 500)]

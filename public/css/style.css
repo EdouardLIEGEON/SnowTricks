@@ -7,7 +7,7 @@
   font-family: lato;
   src: url("../fonts/lato.ttf") format("truetype");
 }
-body{
+html{
   overflow-x:hidden;
 }
 header, #register, #login{
@@ -31,6 +31,7 @@ header, #register, #login{
 }
 nav{
   background: #fff;
+  width:100vw;
 }
 .navbar-light .navbar-nav .nav-link{
   font-family: olivier;
@@ -73,7 +74,7 @@ h1 {
   text-shadow: 1px 1px  blue;
 }
 #tricks{
-padding: 40vh 0;
+padding: 20% 0;
 }
 .title_header{
   font-size: 200px;
@@ -273,24 +274,31 @@ display:block;
 .single h2{
   margin-bottom: 50px;
 }
- .blue{
+.btn-medias{
+  display:block;
+  margin: 5rem auto;
+  padding:1rem 2rem;
+  visibility:hidden;
+}
+.single-blue{
   background: #e2fcfb;
   padding: 50px 0px;
+  margin: 4rem 0;
   justify-content: space-around;
 }
-.blue p{
+.single-blue p{
   color: blue;
   text-align: center;
 }
-.blue .description{
+.single-blue .description{
   margin-bottom:100px;
 }
-.blue .bottom{
+.single-blue .bottom{
   border: solid 1px blue;
   margin: 0 50px;
   padding-top:15px;
 }
-.blue .bottom h3{
+.single-blue .bottom h3{
   font-weight: bold;
   color: blue;
   text-align: center;
@@ -413,7 +421,6 @@ padding:2rem 5rem;
 }
 
 
-
 /*Responsive*/
 @media (max-width:1500px){
 
@@ -479,6 +486,10 @@ padding:2rem 5rem;
     }
 }
 @media (max-width:450px){
+   header{
+    height:50vh;
+    padding:25% 0;
+  }
   h1.title_header, h1{
     font-size:75px;
   }
@@ -487,6 +498,7 @@ padding:2rem 5rem;
   }
   #scroll_to_down{
     margin-left:25%;
+    margin-top: 25%;
   }
   label{
     font-size: 12px;
@@ -498,7 +510,37 @@ padding:2rem 5rem;
     width:300px;
     height:200px;
   }
+  .btn-medias{
+    visibility:visible;
+  }
+  .single{
+display:none;
 }
-
-
-
+body{
+  width:100vw;
+}
+ .medias {
+  background: #fff;
+  padding: 2rem 0;
+  width: 100vw;
+  position: relative;
+  transition: all 5s ease-in-out;
+  border: solid 3px #e2fcfb;
+  box-shadow: 3px 3px 3px blue;
+  overflow-x:hidden;
+}
+#popup4{
+  overflow-x: hidden;
+  width:100vw;
+}
+.medias img, iframe{
+  width:75vw;
+  display:block;
+  margin: 1rem auto;
+}
+.close-medias{
+  font-size: 2rem;
+  color: blue;
+  text-decoration:none;
+  padding-left: 2rem;
+}
