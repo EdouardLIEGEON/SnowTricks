@@ -12,7 +12,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UsersRepository::class)]
 #[UniqueEntity(fields: ['email'], message: 'Il y a déjà un compte avec cet email')]
-class Users implements PasswordAuthenticatedUserInterface
+class Users implements PasswordAuthenticatedUserInterface, UserInterface
 {
     
     #[ORM\Id]
@@ -176,6 +176,10 @@ class Users implements PasswordAuthenticatedUserInterface
 
         return $this;
     }
-    
+
+    public function getRoles(): array
+    {
+        return ['ROLE_USER'];
+    }
 
 }
