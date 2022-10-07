@@ -10,10 +10,9 @@
 html{
   overflow-x:hidden;
 }
-header, #register, #login{
+ header, #register, #login{
   height: 90vh;
   width: 100%;
-  padding: 25vh 0 0 0;
   background: url("/img/bg.jpg");
   background-attachment: fixed;
   background-position: center;
@@ -22,7 +21,6 @@ header, #register, #login{
 }
 #tricks{
   width: 100%;
-  padding: 25vh 0 0 0;
   background: url("/img/bg.jpg");
   background-attachment: fixed;
   background-position: center;
@@ -72,10 +70,9 @@ h1 {
   color: #e2fcfb;
   font-family: olivier;
   text-shadow: 1px 1px  blue;
+  padding-top: 25vh;
 }
-#tricks{
-padding: 20% 0;
-}
+
 .title_header{
   font-size: 200px;
 }
@@ -87,8 +84,14 @@ h2 {
   color: #e2fcfb;
   text-shadow: 1px 1px  blue;
 }
+.connected{
+text-align:center;
+color:blue;
+font-size:2rem;
+padding-top:2rem;
+}
 .pseudo_connect{
-  font-size: 25px;
+  font-size: 2rem;
   font-family: olivier;
   color: #e2fcfb;
   text-shadow: 1px 1px  blue;
@@ -276,7 +279,6 @@ display:block;
 }
 .btn-medias{
   display:block;
-  margin: 5rem auto;
   padding:1rem 2rem;
   visibility:hidden;
 }
@@ -305,8 +307,14 @@ display:block;
   font-family: olivier;
   font-size:25px;
 }
+.single_comment{
+  margin: 4rem 0;
+}
+.single_comment h2{
+  padding-bottom: 2rem;
+}
 .comments{
-margin:6rem 0;
+margin:1rem 0;
 }
 .comments p{
   padding:1.2rem 0 0 3rem;
@@ -487,12 +495,18 @@ padding:2rem 5rem;
 }
 @media (max-width:450px){
    header{
-    height:50vh;
-    padding:25% 0;
+    height:75vh;
+    padding:2rem 0;
+  }
+  footer{
+    height: 25vh;
   }
   h1.title_header, h1{
     font-size:75px;
   }
+.connected{
+  padding-top:0;
+}
   #tricks h1{
     font-size:35px;
   }
@@ -543,4 +557,5 @@ body{
   color: blue;
   text-decoration:none;
   padding-left: 2rem;
+}
 }

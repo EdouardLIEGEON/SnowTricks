@@ -3,6 +3,7 @@
 namespace App\Controller;
 use App\Entity\Tricks;
 use App\Entity\Comments;
+use App\Entity\Users;
 use App\Form\CreateTrickType;
 use App\Form\UpdateHeaderType;
 use App\Form\UpdatePhotoType;
@@ -20,6 +21,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 #[Route('/tricks')]
 class TricksController extends AbstractController
@@ -96,7 +98,7 @@ class TricksController extends AbstractController
             $entityManager->persist($tricks);
             $entityManager->flush();
 
-            return $this->redirect('/tricks');
+            return $this->redirectToRoute('index');
         }
 
         return $this->render('/tricks/create.html.twig', [ 'CreateTrick' => $form->createView()]);
@@ -164,7 +166,7 @@ class TricksController extends AbstractController
             $entityManager->persist($tricks);
             $entityManager->flush();
 
-            return $this->redirect('/tricks');
+            return $this->redirectToRoute('single', ['name'=>$tricks->getName()]);
         }
         return $this->render('/tricks/update.html.twig', [ 'tricks'=> $tricks, 'UpdateTrick' => $updateForm->createView()]);
     }
@@ -206,7 +208,7 @@ class TricksController extends AbstractController
             $entityManager->persist($tricks);
             $entityManager->flush();
 
-            return $this->redirect('/tricks');
+            return $this->redirectToRoute('single', ['name'=>$tricks->getName()]);
         }
         return $this->render('/tricks/updateHeader.html.twig', [ 'tricks'=> $tricks, 'UpdateHeader' => $updateHeaderForm->createView()]);
 
@@ -249,7 +251,7 @@ class TricksController extends AbstractController
             $entityManager->persist($tricks);
             $entityManager->flush();
 
-            return $this->redirect('/tricks');
+            return $this->redirectToRoute('single', ['name'=>$tricks->getName()]);
         }
         return $this->render('/tricks/updatePhoto.html.twig', [ 'tricks'=> $tricks, 'UpdatePhoto' => $updatePhotoForm->createView()]);
 
@@ -270,7 +272,7 @@ class TricksController extends AbstractController
             $entityManager->persist($tricks);
             $entityManager->flush();
 
-            return $this->redirect('/tricks');
+            return $this->redirectToRoute('single', ['name'=>$tricks->getName()]);
         }
         return $this->render('/tricks/updateVideo.html.twig', [ 'tricks'=> $tricks, 'UpdateVideo' => $updateVideoForm->createView()]);
 
@@ -284,7 +286,7 @@ class TricksController extends AbstractController
             $manager->remove($tricks);
             $manager->flush();
 
-            return $this->redirect('/tricks');
+            return $this->redirectToRoute('single', ['name'=>$tricks->getName()]);
         }
     }
 
@@ -297,7 +299,7 @@ class TricksController extends AbstractController
             $manager->persist($tricks);
             $manager->flush();
 
-            return $this->redirect('/tricks');
+            return $this->redirectToRoute('single', ['name'=>$tricks->getName()]);
         }
     }
 
@@ -310,7 +312,7 @@ class TricksController extends AbstractController
             $manager->persist($tricks);
             $manager->flush();
 
-            return $this->redirect('/tricks');
+            return $this->redirectToRoute('single', ['name'=>$tricks->getName()]);
         }
     }
 
@@ -323,12 +325,12 @@ class TricksController extends AbstractController
             $manager->persist($tricks);
             $manager->flush();
 
-            return $this->redirect('/tricks');
+            return $this->redirectToRoute('single', ['name'=>$tricks->getName()]);
         }
     }
 
     #[Route('/trick/{name}', name: 'single')]
-    public function single(Tricks $tricks, CommentsRepository $commentsRepository, Request $request, ManagerRegistry $doctrine): Response
+    public function single(Tricks $tricks, CommentsRepository $commentsRepository, ManagerRegistry $doctrine, UserInterface $user, Request $request): Response
     {
         $entityManager = $doctrine->getManager();
         $comments = new Comments();
@@ -338,13 +340,14 @@ class TricksController extends AbstractController
         if ($commentForm->isSubmitted() && $commentForm->isValid()) {
             $setContent = $commentForm->get('content')->getData();
             $comments->setTricksId($tricks);
-            $comments->setUsers($_SESSION['']);
-        
+            $comments->setUsers($user);
+            
+
             $comments->dateTime = new DateTime();
             $entityManager->persist($comments);
             $entityManager->flush();
 
-            return $this->redirect('/tricks/trick/{id}');
+            return $this->redirectToRoute('single', ['name'=>$tricks->getName()]);
         }
 
         return $this->render('/tricks/single.html.twig', ['tricks'=> $tricks,

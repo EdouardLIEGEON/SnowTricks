@@ -3,26 +3,30 @@
 {% block title %}{{ tricks.name }} | {% endblock %}
 
 {% block body %}
-{# {% if app.user %} #}
-    <div class="row" style="padding-top:1rem; margin: 0 0">
-        <div class="col-10">
+    <header id='tricks' style="background: url(/img/{{tricks.header}});background-attachment: fixed;background-position: center;background-repeat: no-repeat;background-size: cover;">
+         {% if app.user %}
+    <div class="row" style="padding-top:1rem; margin: 0 0;">
+        <div class="col-md-11 col-sm-0">
         </div>
-        <div class="col-2"><a href="{{path('updateHeader', {"id": tricks .id})}}" class="links_tricks"><img src="/img/update.png"></a>
+        <div class="col-lg-1 col-sm-12"><a href="{{path('updateHeader', {"id": tricks .id})}}" class="links_tricks"><img src="/img/update.png"></a>
             <a class="button links_tricks" href="#popup1/{{tricks.id}}"><img src="/img/delete.png"></a>
         </div>
-    </div>    
-    {# {% else %}
-    {% endif %} #}
-    <header id='tricks' style="background: url(/img/{{tricks.header}});background-attachment: fixed;background-position: center;background-repeat: no-repeat;background-size: cover;">
+    </div> 
+    {% endif %}   
+     {% if app.user %}
+        <div class="mb-3">
+            <p class="connected"> Salut <span class="pseudo_connect"> {{ app.user.name }} </span>!</p>
+        </div>
+    {% endif %}
         <h1>{{tricks.name}}</h1>
     </header>
-    <a href="#popup4"><button class="btn-primary btn-medias">Afficher les médias</button></a>
+    <button class="btn-primary btn-medias"><a href="#popup4">Afficher les médias</a></button>
     <section class="container-fluid single-trick">
         <div class="row single">
-            <div class="col-lg-6 col-sm-12">
+            <div class="col-md-6 col-sm-12">
                 <h2>Photo</h2>
                 <img src="/img/{{tricks.photo}}">
-                {# {% if app.user %} #}
+                {% if app.user %}
                 <div class="row" style="padding:1rem 0">
                     <div class="col-5">
                     </div>
@@ -35,16 +39,16 @@
                         <div class="col-5">
                     </div>
                 </div> 
-                {# {% else %}
-                {% endif %} #}  
+                {% else %}
+                {% endif %}
             </div>
-            <div class="col-lg-6 col-12">
+            <div class="col-md-6 col-12">
                 <h2>Vidéo</h2>
                 <iframe  src="{{tricks.video}}" 
                 title="YouTube video player" frameborder="0" 
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                 allowfullscreen></iframe>
-                {# {% if app.user %} #}
+                {% if app.user %}
                 <div class="row" style="padding:1rem 0">
                     <div class="col-5">
                     </div>
@@ -57,8 +61,8 @@
                         <div class="col-5">
                     </div>
                 </div> 
-                {# {% else %}
-                {% endif %} #}  
+                {% else %}
+                {% endif %}
             </div>
             </div> 
         </div>
@@ -90,24 +94,24 @@
     <div class="container">
         <div class="row single_comment ">
             <h2>Discussions à propos de "{{tricks.name}}"</h2>
+            {% for comment in comments %}
             <div class="comments">
-                {% for comment in comments %}
                 <img class="img_comment" src="/img/{{comment.users.photo}}">
                 <p>{{comment.content}}</p>
-                {% endfor %} 
             </div>
+                {% endfor %} 
         </div>
     </div>
 
-        {# {% if app.user %} #}
+        {% if app.user %}
             <div class="row form-single align-center">
                         {{ form_start(AddComment) }}
                             {{ form_row(AddComment.content) }}
                             <button type="submit" class="btn btn-lg btn-primary my-3">Ajouter un commentaire</button>
                         {{ form_end(AddComment) }}
             </div>
-        {# {% else %} #}
-        {# {% endif %} #}
+        {% else %}
+        {% endif %}
     </section>
     <div id="popup1/{{tricks.id}}" class="overlay">
         <div class="popup container-fluid">
@@ -161,7 +165,7 @@
             <div class="col-lg-6 col-sm-12">
                 <h2>Photo</h2>
                 <img src="/img/{{tricks.photo}}">
-                {# {% if app.user %} #}
+                {% if app.user %}
                 <div class="row" style="padding:1rem 0">
                     <div class="col-5">
                     </div>
@@ -174,8 +178,8 @@
                         <div class="col-5">
                     </div>
                 </div> 
-                {# {% else %}
-                {% endif %} #}  
+                {% else %}
+                {% endif %}
             </div>
             <div class="col-lg-6 col-12">
                 <h2>Vidéo</h2>
@@ -183,7 +187,7 @@
                 title="YouTube video player" frameborder="0" 
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                 allowfullscreen></iframe>
-                {# {% if app.user %} #}
+                {% if app.user %}
                 <div class="row" style="padding:1rem 0">
                     <div class="col-5">
                     </div>
@@ -196,8 +200,8 @@
                         <div class="col-5">
                     </div>
                 </div> 
-                {# {% else %}
-                {% endif %} #}  
+                {% else %}
+                {% endif %}
             </div>
             </div> 
         </div>
