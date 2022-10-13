@@ -168,12 +168,14 @@ form{
   margin-right: auto;
   margin-top: 100px;
 }
-
+.form-single label{
+  display:none;
+}
 label{
   font-family: olivier;
   color: #fff;
   font-size: 25px;
- position: absolute;
+  text-align:center;
 }
 .trick {
   position: relative;
@@ -315,12 +317,41 @@ display:block;
 }
 .comments{
 margin:1rem 0;
+display:block;
 }
-.comments p{
-  padding:1.2rem 0 0 3rem;
-}
+
 .comments img{
   border-radius : 75px;
+}
+.comment_date{
+  font-size:0.8rem !important;
+  color:blue;
+  font-family:lato !important;
+}
+.comments p{
+  font-family: olivier;
+  font-size:25px;
+  color: blue;
+}
+.comments img{
+  width:50px;
+  height:50px;
+  object-fit: cover;
+}
+.comments h3{
+  font-family: olivier;
+  font-size:25px;
+  color: blue;
+}
+.form-single{
+background: blue !important;
+padding:2rem 5rem;
+}
+.form-text{
+  color:#ffff;
+  font-family: olivier;
+  text-align: center;
+  font-size: 25px; 
 }
 #scroll_to_top {
   width: 200px;
@@ -396,38 +427,6 @@ margin-bottom:25px;
   font-size:20px;
   text-decoration: none;
 }
-.comments{
-  display: inline-flex;
-  align-items: center;
-}
-.comments p{
-  font-family: olivier;
-  font-size:25px;
-  color: blue;
-  text-align: center;
-}
-.comments img{
-  width:50px;
-  height:50px;
-  object-fit: cover;
-}
-.comments h3{
-  font-family: olivier;
-  font-size:25px;
-  color: blue;
-  padding-left: 20px;
-}
-.form-single{
-background: blue !important;
-padding:2rem 5rem;
-}
-.form-text{
-  color:#ffff;
-  font-family: olivier;
-  text-align: center;
-  font-size: 25px; 
-}
-
 
 /*Responsive*/
 @media (max-width:1500px){
@@ -526,6 +525,10 @@ padding:2rem 5rem;
   }
   .btn-medias{
     visibility:visible;
+    display:block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 4rem;
   }
   .single{
 display:none;
@@ -558,4 +561,9 @@ body{
   text-decoration:none;
   padding-left: 2rem;
 }
+.comments{
+  margin:1rem 0;
+  text-align: center;
+  }
+
 }

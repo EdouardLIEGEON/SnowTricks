@@ -330,7 +330,7 @@ class TricksController extends AbstractController
     }
 
     #[Route('/trick/{name}', name: 'single')]
-    public function single(Tricks $tricks, CommentsRepository $commentsRepository, ManagerRegistry $doctrine, UserInterface $user, Request $request): Response
+    public function single(Tricks $tricks, CommentsRepository $commentsRepository, ManagerRegistry $doctrine, UserInterface $user = null, Request $request): Response
     {
         $entityManager = $doctrine->getManager();
         $comments = new Comments();

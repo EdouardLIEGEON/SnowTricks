@@ -8,7 +8,7 @@
                         <div class="mb-3">
                         <p class="connected"> Salut <span class="pseudo_connect"> {{ app.user.name }} </span>!</p>
                         </div>
-                    {% endif %}
+    {% endif %}
         <h1>Les Tricks pour briller sur les pistes</h1>
         <div id="scroll_to_down">
             <a href="#Tricks"><img src="../img/down.png" alt="Descendre" /></a>
@@ -24,9 +24,9 @@
                         <div class="container-fluid tricks">
                             <a href="{{path('single', {"name": trick .name})}}"><h2>{{trick.name}}</h2></a>
                             {% if app.user %}
-                            <a href="{{path('update', {"id": trick .id})}}" class="links_tricks"><img src="/img/update.png"></a>
+                                <a href="{{path('update', {"id": trick .id})}}" class="links_tricks"><img src="/img/update.png"></a>
                                 <a class="button links_tricks" href="#popup1/{{trick.id}}"><img src="/img/delete.png"></a>
-                            {% else %}
+                                {% else %}
                             {% endif %}
                         </div>
                     </figcaption>

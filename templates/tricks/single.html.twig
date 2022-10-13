@@ -90,28 +90,33 @@
                 </div>
             </div>
         </div>
-
-    <div class="container">
-        <div class="row single_comment ">
-            <h2>Discussions à propos de "{{tricks.name}}"</h2>
-            {% for comment in comments %}
-            <div class="comments">
-                <img class="img_comment" src="/img/{{comment.users.photo}}">
-                <p>{{comment.content}}</p>
-            </div>
-                {% endfor %} 
-        </div>
-    </div>
-
-        {% if app.user %}
+     {% if app.user %}
             <div class="row form-single align-center">
+                        <h2>Ajouter un commentaire</h2>
                         {{ form_start(AddComment) }}
                             {{ form_row(AddComment.content) }}
-                            <button type="submit" class="btn btn-lg btn-primary my-3">Ajouter un commentaire</button>
+                            <button type="submit" class="btn btn-lg btn-primary my-3">Ajouter</button>
                         {{ form_end(AddComment) }}
             </div>
         {% else %}
         {% endif %}
+    <div class="container">
+        <div class="row single_comment ">
+            <h2>Discussions à propos de "{{tricks.name}}"</h2>
+            {% for comment in comments %}
+            <div class="col-lg-2 col-sm-12 comments">
+                <img class="img_comment" src="/img/{{comment.users.photo}}">
+                <h3>{{comment.users.name}}</h3>
+            </div>
+            <div class="col-lg-10 col-sm-12 comments">
+                <p>{{comment.content}}</p>
+                <p class="comment_date">{{comment.dateTime|date("d/m/Y")}}</p>
+            </div>
+
+
+                {% endfor %} 
+        </div>
+    </div>
     </section>
     <div id="popup1/{{tricks.id}}" class="overlay">
         <div class="popup container-fluid">

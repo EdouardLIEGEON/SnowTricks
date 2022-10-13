@@ -17,7 +17,7 @@ class AddCommentType extends AbstractType
             'attr' => [
                 'class' => 'form-control'
             ],
-            'label' => 'Commentaire'])
+            'label' => ''])
         ;
     }
 
