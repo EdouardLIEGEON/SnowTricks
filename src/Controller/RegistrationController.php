@@ -5,25 +5,22 @@ namespace App\Controller;
 use App\Entity\Users;
 use App\Repository\UsersRepository;
 use App\Form\RegistrationFormType;
-use App\Security\UsersAuthenticator;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use App\Services\Mailer;
 use Doctrine\Persistence\ManagerRegistry;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 class RegistrationController extends AbstractController
 {
     #[Route('/register', name: 'app_register')]
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, 
-    UserAuthenticatorInterface $userAuthenticator, UsersAuthenticator $authenticator, SluggerInterface $slugger, Mailer $mailer, ManagerRegistry $doctrine): Response
+    SluggerInterface $slugger, Mailer $mailer, ManagerRegistry $doctrine): Response
     {
         $entityManager = $doctrine->getManager();
         $user = new Users();

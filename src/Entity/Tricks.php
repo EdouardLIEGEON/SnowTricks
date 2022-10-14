@@ -3,10 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\TricksRepository;
-use DateTime;
-use Doctrine\ORM\Cache\Region\UpdateTimestampCache;
 use Doctrine\ORM\Mapping as ORM;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 #[ORM\Entity(repositoryClass: TricksRepository::class)]
 class Tricks
