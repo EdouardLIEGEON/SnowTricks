@@ -1,4 +1,4 @@
-@font-face {
+@font-face{
   font-family: olivier;
   src: url("../fonts/olivier.ttf") format("truetype");
 }
@@ -7,9 +7,11 @@
   font-family: lato;
   src: url("../fonts/lato.ttf") format("truetype");
 }
-html{
+
+html {
   overflow-x:hidden;
 }
+
  header, #register, #login {
   height: 90vh;
   width: 100%;
@@ -19,6 +21,7 @@ html{
   background-repeat: no-repeat;
   background-size: cover;
 }
+
 #tricks {
   width: 100%;
   background: url("/img/bg.jpg");
@@ -27,10 +30,12 @@ html{
   background-repeat: no-repeat;
   background-size: cover;
 }
+
 nav {
   background: #fff;
   width:100vw;
 }
+
 .navbar-light .navbar-nav .nav-link {
   font-family: olivier, sans-serif;
   color: #e2fcfb;
@@ -38,17 +43,21 @@ nav {
   margin: 0 25px;
   font-size: 25px;
 }
+
 .navbar-light .navbar-nav .nav-item:before {
   background-image: url('');
 }
+
 .navbar-light .navbar-nav .nav-item:hover {
   background-image: url('/img/flocon.png');
   background-position: center;
   background-repeat: no-repeat;
 }
+
 .navbar-light .navbar-nav .nav-link:hover {
   color: #e2fcfb;
 }
+
 .navbar-light .navbar-brand {
   font-family: olivier, sans-serif;
   color: #e2fcfb;
@@ -66,6 +75,7 @@ h1 {
   text-shadow: 1px 1px  blue;
   padding-top: 25vh;
 }
+
 #register h1{
   padding-top:5vh;
 }
@@ -81,18 +91,21 @@ h2 {
   color: #e2fcfb;
   text-shadow: 1px 1px  blue;
 }
+
 .connected {
 text-align:center;
 color:blue;
 font-size:2rem;
 padding-top:2rem;
 }
+
 .pseudo_connect {
   font-size: 2rem;
   font-family: olivier, sans-serif;
   color: #e2fcfb;
   text-shadow: 1px 1px  blue;
 }
+
 p {
   font-size: 20px;
   font-family: lato, sans-serif;
@@ -102,6 +115,7 @@ p {
   background: #fff;
   padding-top: 100px;
 }
+
 .btn-primary {
   background-color: #e2fcfb;
   border: solid 2px #e2fcfb;
@@ -109,18 +123,21 @@ p {
   font-family: olivier, sans-serif;
   text-decoration: none;
 }
+
  form .btn-primary {
   width: 200px;
   display: block;
   margin-left: auto;
   margin-right: auto;
 }
+
 .btn-primary:hover {
   background-color: blue;
   border: solid 2px #e2fcfb;
   color: #e2fcfb;
   text-decoration: none;
 }
+
 .btn-primary:hover a {
   color: #e2fcfb;
 }
@@ -129,6 +146,7 @@ footer {
   margin-top: 25px;
   padding: 25px 0;
 }
+
 .logo_footer {
   font-family: olivier, sans-serif;
   color: #e2fcfb;
@@ -145,6 +163,7 @@ footer {
   margin: 0 25px;
   font-size: 40px;
 }
+
 .form-control {
   width: 40%;
   background: transparent;
@@ -156,27 +175,32 @@ footer {
   margin-left: auto;
   margin-right: auto;
 }
+
 form input {
   margin-bottom: 20px;
   font-family: lato, sans-serif;
   font-size: 14px;
   text-align: center;
 }
+
 form {
   display: block;
   margin-left: auto;
   margin-right: auto;
   margin-top: 100px;
 }
+
 .form-single label {
   display:none;
 }
+
 form label {
   font-family: olivier, sans-serif;
   color: #fff;
   font-size: 25px;
   text-align:center;
 }
+
 .trick {
   position: relative;
   display: inline-block;
@@ -203,7 +227,7 @@ form label {
   max-width:500px;
   height: 300px;
   -webkit-backface-visibility: hidden;
-          backface-visibility: hidden;
+  backface-visibility: hidden;
   background-position: center;
 }
 
@@ -224,11 +248,13 @@ form label {
   z-index: 11;
   margin-left:1%;
 }
+
 .trick figcaption .content {
   display: block;
   margin-left: auto;
   margin-right: auto;
 }
+
 .trick a {
   text-decoration: none;
   color: #53afe0;
@@ -239,9 +265,11 @@ form label {
   transform: translateX(0);
   transition: 1, 5s;
 }
+
 .trick {
   margin-top: 100px;
 }
+
 .tricks {
   display: flex;  
 }
@@ -252,55 +280,67 @@ form label {
   color: blue;
   padding-right:1.2rem;
 }
+
 .tricks a {
   text-decoration: none;
 }
+
 .tricks {
   background: #e2fcfb;
   width: 98%;
   height: 100px;
   padding-top: 35px;
 }
+
 .links_tricks img {
-width:30px;
-height:30px;
+  width:30px;
+  height:30px;
 }
+
 .single img, iframe {
-width: 600px;
-height: 400px;
-display:block;
+  width: 600px;
+  height: 400px;
+  display:block;
   margin-left:auto;
   margin-right:auto;
 }
+
 .single {
   margin: 100px 0;
 }
+
 .single h2 {
   margin-bottom: 50px;
 }
+
 .btn-medias {
   display:block;
   padding:1rem 2rem;
   visibility:hidden;
 }
+
 .single-blue {
   background: #e2fcfb;
   padding: 50px 0px;
   margin: 4rem 0;
   justify-content: space-around;
 }
+
 .single-blue p {
   color: blue;
   text-align: center;
 }
+
 .single-blue .description {
   margin-bottom:100px;
 }
+
 .single-blue .bottom {
   border: solid 1px blue;
   margin: 0 50px;
   padding-top:15px;
 }
+
 .single-blue .bottom h3 {
   font-weight: bold;
   color: blue;
@@ -308,12 +348,15 @@ display:block;
   font-family: olivier, sans-serif;
   font-size:25px;
 }
+
 .single_comment {
   margin: 4rem 0;
 }
+
 .single_comment h2 {
   padding-bottom: 2rem;
 }
+
 .comments {
 margin:1rem 0;
 display:block;
@@ -322,36 +365,43 @@ display:block;
 .comments img {
   border-radius : 75px;
 }
+
 .comment_date {
   font-size:0.8rem !important;
   color:blue;
   font-family:lato, sans-serif !important;
 }
+
 .comments p {
   font-family: olivier, sans-serif;
   font-size:25px;
   color: blue;
 }
+
 .comments img {
   width:50px;
   height:50px;
   object-fit: cover;
 }
+
 .comments h3 {
   font-family: olivier, sans-serif;
   font-size:25px;
   color: blue;
 }
+
 .form-single {
-background: blue !important;
-padding:2rem 5rem;
+  background: blue !important;
+  padding:2rem 5rem;
 }
+
 .form-text {
   color:#ffff;
   font-family: olivier, sans-serif;
   text-align: center;
   font-size: 25px; 
 }
+
 #scroll_to_top {
   width: 200px;
   height: 100px;
@@ -362,6 +412,7 @@ padding:2rem 5rem;
   margin-left: auto;
   margin-right: auto;
 }
+
 #scroll_to_top img {
   width: 200px;
 }
@@ -377,16 +428,19 @@ padding:2rem 5rem;
   visibility: hidden;
   opacity: 0;
 }
+
 .overlay:target {
   visibility: visible;
   opacity: 1;
 }
+
 #scroll_to_down {
   margin: 25vh;
   display: block;
   margin-left:45%;
   margin-right:45%;
 }
+
 .popup {
   margin: 70px auto;
   padding: 20px;
@@ -398,15 +452,16 @@ padding:2rem 5rem;
   border: solid 3px #e2fcfb;
   box-shadow: 3px 3px 3px blue;
 }
+
 .close {
   display: flex;
-
 }
 
 .popup .content {
   max-height: 30%;
   overflow: auto;
 }
+
 .create {
   font-size:20px;
   text-decoration: none;
@@ -417,94 +472,117 @@ padding:2rem 5rem;
 @media (max-width:1360px) {
   #tricks h1 {
     font-size:75px;
-  }
- 
+  } 
 }
+
 @media (max-width:1000px) {
   h1.title_header,h1 {
     font-size:150px;
   }
+
   #tricks h1 {
     font-size:50px;
   }
+
   #scroll_to_down {
     margin-left:42%;
   }
+
   #login, #register {
     height:150vh;
   }
 }
+
 @media (max-width:775px) {
   .form-control {
     width:50%;
     font-size:15px;
   }
 }
+
 @media screen and (max-width: 700px) {
   .box {
     width: 70%;
   }
+
   .popup {
     width: 70%;
   }
 }
+
 @media (max-width:675px) {
   h1.title_header,h1 {
     font-size:100px;
   }
+
   .trick, .trick img {
-  width: 350px;
-  height:250px;
+    width: 350px;
+    height:250px;
   }
+
   .links_tricks img {
     width:30px;
     height:30px;
   }
+
   #scroll_to_down {
     margin-left:35%;
   }
+
   label {
     font-size: 20px;
   }
+
   .single img, iframe {
     width:400px;
     height:300px;
   }
+
   .form-single {
     padding:2rem 1rem;
     }
 }
+
 @media (max-width:450px) {
    header {
     height:75vh;
     padding:2rem 0;
   }
+
   footer {
     height: 25vh;
   }
+
   h1.title_header, h1 {
     font-size:75px;
   }
+
 .connected {
   padding-top:0;
 }
+
   #tricks h1 {
     font-size:35px;
   }
+
   #scroll_to_down {
     margin-left:25%;
     margin-top: 25%;
   }
+
   label {
     font-size: 12px;
   }
+
   .form-control {
     width:60%;
   }
+
   .single img, iframe {
     width:300px;
     height:200px;
   }
+
   .btn-medias {
     visibility:visible;
     display:block;
@@ -512,37 +590,44 @@ padding:2rem 5rem;
     margin-right: auto;
     margin-top: 4rem;
   }
+
   .single {
-display:none;
+    display:none;
 }
+
 body {
   width:100vw;
 }
+
  .medias {
-  background: #fff;
-  padding: 2rem 0;
-  width: 100vw;
-  position: relative;
-  transition: all 5s ease-in-out;
-  border: solid 3px #e2fcfb;
-  box-shadow: 3px 3px 3px blue;
-  overflow-x:hidden;
+    background: #fff;
+    padding: 2rem 0;
+    width: 100vw;
+    position: relative;
+    transition: all 5s ease-in-out;
+    border: solid 3px #e2fcfb;
+    box-shadow: 3px 3px 3px blue;
+    overflow-x:hidden;
 }
+
 #popup4 {
   overflow-x: hidden;
   width:100vw;
 }
+
 .medias img, iframe {
   width:75vw;
   display:block;
   margin: 1rem auto;
 }
+
 .close-medias {
   font-size: 2rem;
   color: blue;
   text-decoration:none;
   padding-left: 2rem;
 }
+
 .comments {
   margin:1rem 0;
   text-align: center;
