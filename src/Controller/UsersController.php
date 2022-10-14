@@ -18,7 +18,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 class UsersController extends AbstractController
 {
     #[Route('/forgotPassword', name: 'forgotPassword')]
-    public function forgotPassword(Request $request, UsersRepository $usersRepository, TokenGeneratorInterface $tokenGeneratorInterface, EntityManagerInterface $entityManager,
+    public function forgotPassword(Request $request, UsersRepository $usersRepository, TokenGeneratorInterface $tokenGen, EntityManagerInterface $entityManager,
     Mailer_resetPassword $mailer_reset): Response
     {
         
@@ -32,7 +32,7 @@ class UsersController extends AbstractController
 
             if($user){
                 //On génère un token 
-                $token = $tokenGeneratorInterface->generateToken();
+                $token = $tokenGen->generateToken();
                 $user->setToken($token);
                 $entityManager->persist($user);
                 $entityManager->flush();

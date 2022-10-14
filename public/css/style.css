@@ -116,6 +116,11 @@ p {
   padding-top: 100px;
 }
 
+.trick a {
+  text-decoration: none;
+  color: #53afe0;
+}
+
 .btn-primary {
   background-color: #e2fcfb;
   border: solid 2px #e2fcfb;
@@ -190,15 +195,15 @@ form {
   margin-top: 100px;
 }
 
-.form-single label {
-  display:none;
-}
-
 form label {
   font-family: olivier, sans-serif;
   color: #fff;
   font-size: 25px;
   text-align:center;
+}
+
+.form-single label {
+  display:none;
 }
 
 .trick {
@@ -211,7 +216,7 @@ form label {
   transform: translateZ(0);
   overflow: hidden;
   margin: auto;
-  margin-top: 50px;
+  margin-top: 150px;
 }
 
 .trick:hover,
@@ -236,6 +241,10 @@ form label {
   transition: 1.5s;
 }
 
+.tricks a {
+  text-decoration: none;
+}
+
 .trick figcaption {
   position: absolute;
   max-width: 500px;
@@ -255,23 +264,10 @@ form label {
   margin-right: auto;
 }
 
-.trick a {
-  text-decoration: none;
-  color: #53afe0;
-}
-
 .trick:hover figcaption {
   opacity: 1;
   transform: translateX(0);
   transition: 1, 5s;
-}
-
-.trick {
-  margin-top: 100px;
-}
-
-.tricks {
-  display: flex;  
 }
 
 .tricks h2 {
@@ -281,15 +277,12 @@ form label {
   padding-right:1.2rem;
 }
 
-.tricks a {
-  text-decoration: none;
-}
-
 .tricks {
   background: #e2fcfb;
   width: 98%;
   height: 100px;
   padding-top: 35px;
+  display: flex;  
 }
 
 .links_tricks img {
@@ -341,6 +334,12 @@ form label {
   padding-top:15px;
 }
 
+.comments h3 {
+  font-family: olivier, sans-serif;
+  font-size:25px;
+  color: blue;
+}
+
 .single-blue .bottom h3 {
   font-weight: bold;
   color: blue;
@@ -382,12 +381,6 @@ display:block;
   width:50px;
   height:50px;
   object-fit: cover;
-}
-
-.comments h3 {
-  font-family: olivier, sans-serif;
-  font-size:25px;
-  color: blue;
 }
 
 .form-single {
