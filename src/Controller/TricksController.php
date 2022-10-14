@@ -3,7 +3,6 @@
 namespace App\Controller;
 use App\Entity\Tricks;
 use App\Entity\Comments;
-use App\Entity\Users;
 use App\Form\CreateTrickType;
 use App\Form\UpdateHeaderType;
 use App\Form\UpdatePhotoType;
@@ -258,7 +257,7 @@ class TricksController extends AbstractController
     }
 
     #[Route('/updateVideo/{id}', name:'updateVideo')]
-    public function updateVideo(ManagerRegistry $doctrine, Request $request, SluggerInterface $slugger, Tricks $tricks): Response
+    public function updateVideo(ManagerRegistry $doctrine, Request $request, Tricks $tricks): Response
     {
         $entityManager = $doctrine->getManager();
         $updateVideoForm = $this->createForm(UpdateVideoType::class, $tricks);
