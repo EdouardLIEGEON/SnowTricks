@@ -32,7 +32,7 @@ nav {
   width:100vw;
 }
 .navbar-light .navbar-nav .nav-link {
-  font-family: olivier;
+  font-family: olivier, sans-serif;
   color: #e2fcfb;
   text-shadow: 1px 1px  blue;
   margin: 0 25px;
